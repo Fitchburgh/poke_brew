@@ -1,9 +1,16 @@
 require 'json'
+require 'redis'
 
 class PokemonController < ApplicationController
   def index
-    @poke_list = JSON.parse(File.read('cache/pokemon/pokemon.json'))
+    
 # maybe add weight and how much they can drink or something
+  end
 
+  def submit
+    redirect_to 'pokemon/index'
   end
 end
+
+# <% pkmn_object = Pokemon.new('name' => 'articuno', 'list' => @poke_list)#, 'id_names' => pkmn_name_and_id) %>
+# <% pkmn_object.write_to(pkmn_object) %>
