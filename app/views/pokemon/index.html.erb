@@ -1,2 +1,7 @@
 <h1>Pokemon#index</h1>
 <p>Find me in app/views/pokemon/index.html.erb</p>
+<% pkmn_object = Pokemon.new('name' => 'zapdos', 'list' => 'pkmn_list')#, 'id_names' => pkmn_name_and_id) %>
+<% pkmn_object.write_to(pkmn_object) %>
+<p>
+<%= "#{pkmn_object.pkmn_id['number']}" %>
+</p>
