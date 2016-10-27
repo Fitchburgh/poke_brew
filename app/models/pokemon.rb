@@ -12,7 +12,7 @@ class Pokemon #< ApplicationRecord
     @pkmn_name = options['name']
     all_pokemon = (options['list']['http://pokeapi.co/api/v2/pokedex/kanto']['pokemon_entries'])
     pkmn_base = all_pokemon.find { |h| h['pokemon_species']['name'] == @pkmn_name }
-    
+
     @pkmn_id = pkmn_base['entry_number']
     @pkmn_readout = {}
   end
@@ -32,11 +32,11 @@ class Pokemon #< ApplicationRecord
       temp_pkmn = get_json("http://pokeapi.co/api/v2/pokemon/#{pkmn_object.pkmn_id}/.json")
       binding.pry
       File.open("cache/pokemon/#{@pkmn_name}.json", 'w+') do |f|
-        f.write(JSON.parse(temp_pkmn))
+        f.write(JSON.dump(temp_pkmn))
         p 'done'
       end
     end
-    searched_pkmn = File.read("cache/pokemon/#{@pkmn_name}.json")
+    searched_pkmn = File.read("cache/pokemon/#{@pkmn_name}.json").to_json
     binding.pry
     @pkmn_readout = JSON.parse(searched_pkmn) rescue ''
   end
