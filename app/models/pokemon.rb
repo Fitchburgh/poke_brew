@@ -1,15 +1,16 @@
 require 'json'
 require 'httparty'
 # require_relative '/Users/Fitchburgh/Documents/TIY/homework/week7/poke_brew/cache/pokemon/name_id'
-require 'pry'
+# require 'pry'
 # pkmn_name_and_id
 
-poke_list = JSON.parse(File.read('cache/pokemon/pokemon.json'))
 
-class Pokemon #< ApplicationRecord
+
+class Pokemon# < ApplicationRecord
   attr_reader :pkmn_name, :pkmn_id, :pkmn_readout
   def initialize(options = {})
     @pkmn_name = options['name']
+
     all_pokemon = (options['list']['http://pokeapi.co/api/v2/pokedex/kanto']['pokemon_entries'])
     pkmn_base = all_pokemon.find { |h| h['pokemon_species']['name'] == @pkmn_name }
 
@@ -30,19 +31,15 @@ class Pokemon #< ApplicationRecord
       puts "Generating details...\n\n\n"
     else
       temp_pkmn = get_json("http://pokeapi.co/api/v2/pokemon/#{pkmn_object.pkmn_id}/.json")
-      binding.pry
       File.open("cache/pokemon/#{@pkmn_name}.json", 'w+') do |f|
         f.write(JSON.dump(temp_pkmn))
         p 'done'
       end
     end
     searched_pkmn = File.read("cache/pokemon/#{@pkmn_name}.json").to_json
-    binding.pry
     @pkmn_readout = JSON.parse(searched_pkmn) rescue ''
   end
 end
 
-pkmn_object = Pokemon.new('name' => 'moltres', 'list' => poke_list)
-pkmn_object.write_to(pkmn_object)
-
-binding.pry
+# pkmn_object = Pokemon.new('name' => 'moltres', 'list' => poke_list)
+# pkmn_object.write_to(pkmn_object)
