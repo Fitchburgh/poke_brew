@@ -4,17 +4,17 @@ require 'httparty'
 require 'pry'
 # pkmn_name_and_id
 
-poke_list = File.read('cache/pokemon/name_id.json')
-
-# poke_list =
+poke_list = JSON.parse(File.read('cache/pokemon/pokemon.json'))
 
 class Pokemon #< ApplicationRecord
   attr_reader :pkmn_name, :pkmn_id, :pkmn_readout
   def initialize(options = {})
     @pkmn_name = options['name']
-    @poke_list = JSON.parse(options['list'])
+    all_pokemon = (options['list']['http://pokeapi.co/api/v2/pokedex/kanto']['pokemon_entries'])
+    pkmn_base = all_pokemon.find { |h| h['pokemon_species']['name'] == @pkmn_name }
+    
+    @pkmn_id = pkmn_base['entry_number']
     @pkmn_readout = {}
-    @pkmn_id = @poke_list.find { |h| h['name'] == @pkmn_name }
   end
 
   def get_json(url)
@@ -29,19 +29,20 @@ class Pokemon #< ApplicationRecord
     if pkmn_object.name_check == true
       puts "Generating details...\n\n\n"
     else
-      temp_pkmn = get_json("http://pokeapi.co/api/v2/pokemon/#{pkmn_object.pkmn_id['number']}/.json")
+      temp_pkmn = get_json("http://pokeapi.co/api/v2/pokemon/#{pkmn_object.pkmn_id}/.json")
+      binding.pry
       File.open("cache/pokemon/#{@pkmn_name}.json", 'w+') do |f|
         f.write(JSON.parse(temp_pkmn))
         p 'done'
       end
     end
     searched_pkmn = File.read("cache/pokemon/#{@pkmn_name}.json")
+    binding.pry
     @pkmn_readout = JSON.parse(searched_pkmn) rescue ''
   end
 end
- # DELETE ME I need to get the list of pokemon and ID's working.  That is whats broken right now. lets get that and turn this in.
 
-pkmn_object = Pokemon.new('name' => 'zapdos', 'list' => poke_list)
+pkmn_object = Pokemon.new('name' => 'moltres', 'list' => poke_list)
 pkmn_object.write_to(pkmn_object)
 
 binding.pry
