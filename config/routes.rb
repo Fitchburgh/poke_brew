@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :trainers
+  root to: 'pokemon#index'
+  
   get 'brewery/index'
 
   get 'pokemon/index'
