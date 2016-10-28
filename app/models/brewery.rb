@@ -4,15 +4,16 @@ require 'redis'
 require 'sidekiq'
 # optional
 require 'pry'
+require_relative '../workers/beer_get_worker.rb'
 #
 
 breweries = { 'Brews' =>
   [
     'Lonerider' => 'd25euF',
-    'Raleigh Brewing' => 'ST1lih',
+    'Raleigh' => 'ST1lih',
     'Surly' => 'cPRfoj',
-    'Gizmo' => 'ehcJKn',
-    'Bull City' => 'eu1cAn',
+    'Gizmo Brew Works' => 'ehcJKn',
+    'Bull City Burger' => 'eu1cAn',
     'Trophy' => '6jDZlV',
     'Fullsteam' => 'HUCz2L',
     'Deep River' => 'bLbQyH',
@@ -21,27 +22,22 @@ breweries = { 'Brews' =>
     'Big Boss' => 'pwfPCD',
     'Mother Earth' => 'LZ4UuN',
     'Bond Brothers' => 'mEDZEd',
-    'Duck Rabbit' => 'rBxNNF'
+    'The Duck-Rabbit Craft' => 'rBxNNF'
   ]}
 #
 class Brewery # < ApplicationRecord
-  def initialize(options)
-    @name = options
-    @brewery_id = ''
+  def initialize(options = {})
+    @name = options['name']
+    @brewery_id = options['breweries']['Brews'].first[@name]
   end
-
-  def get_id(breweries)
-    @brewery_id = breweries['Brews'].first[@name]
-  end
-
 
   def name_check
     return true if File.file?("cache/brewery/#{@name}.json")
   end
 
 
-  def write_to
-    if $redis.get(@name) != nil || self.name_check == true
+  def write_to(object)
+    if  object.name_check == true || Redis.current.get(@name) != nil
     else
       BeerGetWorker.perform_async(@brewery_id)
     end
@@ -52,7 +48,5 @@ class Brewery # < ApplicationRecord
   end
 end
 
-trophy = Brewery.new('Trophy')
-
-trophy.get_id(breweries)
-binding.pry
+trophy = Brewery.new({'name' => 'Trophy', 'breweries' => breweries})
+trophy.write_to(trophy)

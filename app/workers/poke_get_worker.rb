@@ -14,7 +14,7 @@ class PokeGetWorker
       pokemon = {}
       f.write(pokemon[pkmn_name] = [temp_pkmn['name'], temp_pkmn['weight'], temp_pkmn['types'].first])
     end
-    $redis.set(pkmn_name, [temp_pkmn['name'], temp_pkmn['weight'], temp_pkmn['types'].first])
+    Redis.current.set(pkmn_name, [temp_pkmn['name'], temp_pkmn['weight'], temp_pkmn['types'].first])
     p 'jobs done'
   end
 

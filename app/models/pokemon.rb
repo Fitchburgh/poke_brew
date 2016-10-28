@@ -19,12 +19,13 @@ class Pokemon
   end
 
   def write_to(pkmn_object)
-    if pkmn_object.name_check == true || $redis.get(@pkmn_name) != nil
+    if pkmn_object.name_check == true || Redis.current.get(@pkmn_name) != nil
     else
+      binding.pry
       PokeGetWorker.perform_async(@pkmn_id, @pkmn_name)
     end
 
-    @pkmn_readout = $redis.get(@pkmn_name)
+    @pkmn_readout = Redis.current.get(@pkmn_name)
     @pkmn_readout =
       File.read("cache/pokemon/#{@pkmn_name}.json") if @pkmn_readout == {}
   end

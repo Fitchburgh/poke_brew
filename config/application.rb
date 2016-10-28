@@ -20,6 +20,7 @@ module PokeBrew
   class Application < Rails::Application
     config.cache_store = :redis_store, "redis://localhost:6379/0/cache"
     config.eager_load_paths += ["#{config.root}/lib/workers"]
+    config.autoload_paths += %W(#{config.root}/app/workers)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

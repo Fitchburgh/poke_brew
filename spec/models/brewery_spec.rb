@@ -32,21 +32,21 @@ RSpec.describe Brewery, type: :model do
   #       # the string entered as an arg is programmed input and can be hardcoded
   #       data = Brewery.new('trophy')
   #
-  #       allow(data).to receive(:get_json).and_return($redis.get('trophy'))
+  #       allow(data).to receive(:get_json).and_return(Redis.current.get('trophy'))
   #
   #       trophy = data.get_json
   #
-  #       expect($redis.get('trophy'['data']['name'])).to eq 'Trophy Brewing Company'
+  #       expect(Redis.current.get('trophy'['data']['name'])).to eq 'Trophy Brewing Company'
   #     end
   #     it 'returns nil when invalid data' do
   #       # the string entered as an arg is programmed input and can be hardcoded
   #       data = Brewery.new('duck_rabbit')
   #
-  #       allow(data).to receive(:get_json).and_return($redis.get('duck_rabbit'))
+  #       allow(data).to receive(:get_json).and_return(Redis.current.get('duck_rabbit'))
   #
   #       duck_rabbit = data.get_json
   #
-  #       expect($redis.get('duck_rabbit'['data']['name'])).to eq nil
+  #       expect(Redis.current.get('duck_rabbit'['data']['name'])).to eq nil
   #     end
   #   end
   # end
