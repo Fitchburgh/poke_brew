@@ -1,7 +1,6 @@
 require 'json'
 require 'httparty'
 require 'redis'
-require 'sidekiq'
 # optional
 require 'pry'
 require_relative '../workers/beer_get_worker.rb'
@@ -22,10 +21,18 @@ breweries = { 'Brews' =>
     'Big Boss' => 'pwfPCD',
     'Mother Earth' => 'LZ4UuN',
     'Bond Brothers' => 'mEDZEd',
-    'The Duck-Rabbit Craft' => 'rBxNNF'
+    'The Duck-Rabbit Craft' => 'rBxNNF',
+    'Anderson Valley' => 'L2dAEr',
+    'Cisco Brewers' => 'r5kixF', #haunter
+    'Westbrook' => 'HPfwPW', #raichu
+    'DuClaw' => 'TVgBWg', #Ninetails
+    'Jailbreak' => 'cT18w8', #Dragonair
+    'New Belgium' => 'Jt43j7', #arcanine
+    'Cigar City' => 'EYuZg3' #charmander
   ]}
 #
 class Brewery # < ApplicationRecord
+  attr_reader :name, :brewery_id
   def initialize(options = {})
     @name = options['name']
     @brewery_id = options['breweries']['Brews'].first[@name]
@@ -34,7 +41,6 @@ class Brewery # < ApplicationRecord
   def name_check
     return true if File.file?("cache/brewery/#{@name}.json")
   end
-
 
   def write_to(object)
     if  object.name_check == true || Redis.current.get(@name) != nil
@@ -48,5 +54,5 @@ class Brewery # < ApplicationRecord
   end
 end
 
-trophy = Brewery.new({'name' => 'Trophy', 'breweries' => breweries})
-trophy.write_to(trophy)
+fullsteam = Brewery.new({'name' => 'Fullsteam', 'breweries' => breweries})
+fullsteam.write_to(fullsteam)

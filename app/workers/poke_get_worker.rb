@@ -1,6 +1,7 @@
 require 'sidekiq'
 require 'redis'
 require 'httparty'
+require 'json'
 #
 class PokeGetWorker
   include Sidekiq::Worker
