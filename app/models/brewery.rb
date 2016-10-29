@@ -11,6 +11,7 @@ require_relative '../workers/beer_get_worker.rb'
 class Brewery # < ApplicationRecord
   attr_reader :name, :brewery_id, :brewery_readout, :breweries
   def initialize(options = {})
+    # had to write this out instead of writing a scraper. Hopefully I get to it.
     @breweries = { 'Brews' =>
       [
         'Lonerider' => 'd25euF',

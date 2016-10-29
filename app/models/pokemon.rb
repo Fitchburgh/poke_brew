@@ -9,8 +9,8 @@ class Pokemon
   def initialize(options = {})
     @pkmn_name = options['name']
     @poke_list = JSON.parse(File.read('cache/pokemon/pokemon.json'))
-    all_pokemon = @poke_list['http://pokeapi.co/api/v2/pokedex/kanto']['pokemon_entries']
-    pkmn_base = all_pokemon.find { |h| h['pokemon_species']['name'] == @pkmn_name }
+    $all_pokemon = @poke_list['http://pokeapi.co/api/v2/pokedex/kanto']['pokemon_entries']
+    pkmn_base = $all_pokemon.find { |h| h['pokemon_species']['name'] == @pkmn_name }
     @pkmn_id = pkmn_base['entry_number']
     @pkmn_readout = {}
   end
@@ -30,10 +30,10 @@ class Pokemon
       File.read("cache/pokemon/#{@pkmn_name}.json") if @pkmn_readout == {}
   end
 end
-# pkmn_object.write_to(pkmn_object)
 
-# temp_pkmn = get_json("http://pokeapi.co/api/v2/pokemon/#{temp_id}/.json")
-# File.open("cache/pokemon/#{@pkmn_name}.json", 'w+') do |f|
-#   f.write(JSON.dump(temp_pkmn))
-#   p 'done'
-# end
+
+# <% pkmn_object = Pokemon.new('name' => 'zubat', 'list' => @poke_list)#, 'id_names' => pkmn_name_and_id) %>
+# <% pkmn_object = pkmn_object.write_to(pkmn_object) %>
+#
+# <% brewery_object = Brewery.new({'name' => 'DuClaw'}) %>
+# <% brewery_object = brewery_object.write_to(brewery_object) %>

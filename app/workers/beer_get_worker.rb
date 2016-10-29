@@ -41,20 +41,3 @@ end
 #  -12oz serving size
 #  -beer serving number
 #  -60 minutes
-
-
-
-# ([name = 'name' => "#{temp_beers['data'][beers[0]]['nameDisplay']}",
-#   { 'attacks' =>
-#     [{'attack_one' =>
-#       [temp_beers['data'][beers[0]]['style']['ibuMin'], temp_beers['data'][beers[0]]['style']['ibuMax']]
-#     },
-#     {'attack_two' =>
-#       [temp_beers['data'][beers[1]]['style']['ibuMin'], temp_beers['data'][beers[1]]['style']['ibuMax']]
-#     },
-#     {'attack_three' =>
-#       [temp_beers['data'][beers[2]]['style']['ibuMin'], temp_beers['data'][beers[2]]['style']['ibuMax']]
-#     },
-#     {'attack_four' =>
-#       [temp_beers['data'][beers[3]]['style']['ibuMin'], temp_beers['data'][beers[3]]['style']['ibuMax']]
-#     }]}]).to_json

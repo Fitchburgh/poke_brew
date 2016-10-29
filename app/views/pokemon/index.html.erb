@@ -1,19 +1,169 @@
 <h1>Pokemon#index</h1>
 <p>Find me in app/views/pokemon/index.html.erb</p>
-<div class="container">
-  <input type="text" class="form-control search-bar" autocomplete="off" id="pkmnSearch" placeholder="Enter a Pokemon...">
-  <ul class="">
-
+<div class="container main-body">
+  <input type="text" class="form-control search-bar col-sm-3" autocomplete="off" id="pkmnSearch" placeholder="Enter a Pokemon..."></input>
+  <button type="submit" class="btn btn-default pkmn-search-btn col-md-1">Submit</button>
 </div>
+<br />
+<div class="container">
+  <div class="row">
+    <div class="list-group pokemon-list col-sm-3">
+      <button type="button" class="list-group-item pokemon">Bulbasaur</button>
+      <button type="button" class="list-group-item pokemon">Ivysaur</button>
+      <button type="button" class="list-group-item pokemon">Venusaur</button>
+      <button type="button" class="list-group-item pokemon">Charmander</button>
+      <button type="button" class="list-group-item pokemon">Charmeleon</button>
+      <button type="button" class="list-group-item pokemon">Charizard</button>
+      <button type="button" class="list-group-item pokemon">Squirtle</button>
+      <button type="button" class="list-group-item pokemon">Wartortle</button>
+      <button type="button" class="list-group-item pokemon">Blastoise</button>
+      <button type="button" class="list-group-item pokemon">Caterpie</button>
+      <button type="button" class="list-group-item pokemon">Metapod</button>
+      <button type="button" class="list-group-item pokemon">Butterfree</button>
+      <button type="button" class="list-group-item pokemon">Weedle</button>
+      <button type="button" class="list-group-item pokemon">Kakuna</button>
+      <button type="button" class="list-group-item pokemon">Beedrill</button>
+      <button type="button" class="list-group-item pokemon">Pidgey</button>
+      <button type="button" class="list-group-item pokemon">Pidgeotto</button>
+      <button type="button" class="list-group-item pokemon">Pidgeot</button>
+      <button type="button" class="list-group-item pokemon">Rattata</button>
+      <button type="button" class="list-group-item pokemon">Raticate</button>
+      <button type="button" class="list-group-item pokemon">Spearow</button>
+      <button type="button" class="list-group-item pokemon">Fearow</button>
+      <button type="button" class="list-group-item pokemon">Ekans</button>
+      <button type="button" class="list-group-item pokemon">Arbok</button>
+      <button type="button" class="list-group-item pokemon">Pikachu</button>
+      <button type="button" class="list-group-item pokemon">Raichu</button>
+      <button type="button" class="list-group-item pokemon">Sandshrew</button>
+      <button type="button" class="list-group-item pokemon">Sandslash</button>
+      <button type="button" class="list-group-item pokemon">Nidoran♀</button>
+      <button type="button" class="list-group-item pokemon">Nidorina</button>
+      <button type="button" class="list-group-item pokemon">Nidoqueen</button>
+      <button type="button" class="list-group-item pokemon">Nidoran♂</button>
+      <button type="button" class="list-group-item pokemon">Nidorino</button>
+      <button type="button" class="list-group-item pokemon">Nidoking</button>
+      <button type="button" class="list-group-item pokemon">Clefairy</button>
+      <button type="button" class="list-group-item pokemon">Clefable</button>
+      <button type="button" class="list-group-item pokemon">Vulpix</button>
+      <button type="button" class="list-group-item pokemon">Ninetales</button>
+      <button type="button" class="list-group-item pokemon">Jigglypuff</button>
+      <button type="button" class="list-group-item pokemon">Wigglytuff</button>
+      <button type="button" class="list-group-item pokemon">Zubat</button>
+      <button type="button" class="list-group-item pokemon">Golbat</button>
+      <button type="button" class="list-group-item pokemon">Oddish</button>
+      <button type="button" class="list-group-item pokemon">Gloom</button>
+      <button type="button" class="list-group-item pokemon">Vileplume</button>
+      <button type="button" class="list-group-item pokemon">Paras</button>
+      <button type="button" class="list-group-item pokemon">Parasect</button>
+      <button type="button" class="list-group-item pokemon">Venonat</button>
+      <button type="button" class="list-group-item pokemon">Venomoth</button>
+      <button type="button" class="list-group-item pokemon">Diglett</button>
 
-<% pkmn_object = Pokemon.new('name' => 'zubat', 'list' => @poke_list)#, 'id_names' => pkmn_name_and_id) %>
-<% pkmn_object.write_to(pkmn_object) %>
-
-<% brewery_object = Brewery.new({'name' => 'DuClaw'}) %>
-<% brewery_object.write_to(brewery_object) %>
-
-
-<ul>
-  <li><%= brewery_object.brewery_readout %></li>
-  <li><%= pkmn_object.pkmn_readout %></li>
-</ul>
+    </div>
+    <div class="list-group pokemon-list col-sm-3">
+      <button type="button" class="list-group-item pokemon">Dugtrio</button>
+      <button type="button" class="list-group-item pokemon">Meowth</button>
+      <button type="button" class="list-group-item pokemon">Persian</button>
+      <button type="button" class="list-group-item pokemon">Psyduck</button>
+      <button type="button" class="list-group-item pokemon">Golduck</button>
+      <button type="button" class="list-group-item pokemon">Mankey</button>
+      <button type="button" class="list-group-item pokemon">Primeape</button>
+      <button type="button" class="list-group-item pokemon">Growlithe</button>
+      <button type="button" class="list-group-item pokemon">Arcanine</button>
+      <button type="button" class="list-group-item pokemon">Poliwag</button>
+      <button type="button" class="list-group-item pokemon">Poliwhirl</button>
+      <button type="button" class="list-group-item pokemon">Poliwrath</button>
+      <button type="button" class="list-group-item pokemon">Abra</button>
+      <button type="button" class="list-group-item pokemon">Kadabra</button>
+      <button type="button" class="list-group-item pokemon">Alakazam</button>
+      <button type="button" class="list-group-item pokemon">Machop</button>
+      <button type="button" class="list-group-item pokemon">Machoke</button>
+      <button type="button" class="list-group-item pokemon">Machamp</button>
+      <button type="button" class="list-group-item pokemon">Bellsprout</button>
+      <button type="button" class="list-group-item pokemon">Weepinbell</button>
+      <button type="button" class="list-group-item pokemon">Victreebel</button>
+      <button type="button" class="list-group-item pokemon">Tentacool</button>
+      <button type="button" class="list-group-item pokemon">Tentacruel</button>
+      <button type="button" class="list-group-item pokemon">Geodude</button>
+      <button type="button" class="list-group-item pokemon">Graveler</button>
+      <button type="button" class="list-group-item pokemon">Golem</button>
+      <button type="button" class="list-group-item pokemon">Ponyta</button>
+      <button type="button" class="list-group-item pokemon">Rapidash</button>
+      <button type="button" class="list-group-item pokemon">Slowpoke</button>
+      <button type="button" class="list-group-item pokemon">Slowbro</button>
+      <button type="button" class="list-group-item pokemon">Magnemite</button>
+      <button type="button" class="list-group-item pokemon">Magneton</button>
+      <button type="button" class="list-group-item pokemon">Farfetch'd</button>
+      <button type="button" class="list-group-item pokemon">Doduo</button>
+      <button type="button" class="list-group-item pokemon">Dodrio</button>
+      <button type="button" class="list-group-item pokemon">Seel</button>
+      <button type="button" class="list-group-item pokemon">Dewgong</button>
+      <button type="button" class="list-group-item pokemon">Grimer</button>
+      <button type="button" class="list-group-item pokemon">Muk</button>
+      <button type="button" class="list-group-item pokemon">Shellder</button>
+      <button type="button" class="list-group-item pokemon">Cloyster</button>
+      <button type="button" class="list-group-item pokemon">Gastly</button>
+      <button type="button" class="list-group-item pokemon">Haunter</button>
+      <button type="button" class="list-group-item pokemon">Gengar</button>
+      <button type="button" class="list-group-item pokemon">Onix</button>
+      <button type="button" class="list-group-item pokemon">Drowzee</button>
+      <button type="button" class="list-group-item pokemon">Hypno</button>
+      <button type="button" class="list-group-item pokemon">Krabby</button>
+      <button type="button" class="list-group-item pokemon">Kingler</button>
+      <button type="button" class="list-group-item pokemon">Voltorb</button>
+    </div>
+    <div class="list-group pokemon-list col-sm-3">
+      <button type="button" class="list-group-item pokemon">Electrode</button>
+      <button type="button" class="list-group-item pokemon">Exeggcute</button>
+      <button type="button" class="list-group-item pokemon">Exeggutor</button>
+      <button type="button" class="list-group-item pokemon">Cubone</button>
+      <button type="button" class="list-group-item pokemon">Marowak</button>
+      <button type="button" class="list-group-item pokemon">Hitmonlee</button>
+      <button type="button" class="list-group-item pokemon">Hitmonchan</button>
+      <button type="button" class="list-group-item pokemon">Lickitung</button>
+      <button type="button" class="list-group-item pokemon">Koffing</button>
+      <button type="button" class="list-group-item pokemon">Weezing</button>
+      <button type="button" class="list-group-item pokemon">Rhyhorn</button>
+      <button type="button" class="list-group-item pokemon">Rhydon</button>
+      <button type="button" class="list-group-item pokemon">Chansey</button>
+      <button type="button" class="list-group-item pokemon">Tangela</button>
+      <button type="button" class="list-group-item pokemon">Kangaskhan</button>
+      <button type="button" class="list-group-item pokemon">Horsea</button>
+      <button type="button" class="list-group-item pokemon">Seadra</button>
+      <button type="button" class="list-group-item pokemon">Goldeen</button>
+      <button type="button" class="list-group-item pokemon">Seaking</button>
+      <button type="button" class="list-group-item pokemon">Staryu</button>
+      <button type="button" class="list-group-item pokemon">Starmie</button>
+      <button type="button" class="list-group-item pokemon">Mr. Mime</button>
+      <button type="button" class="list-group-item pokemon">Scyther</button>
+      <button type="button" class="list-group-item pokemon">Jynx</button>
+      <button type="button" class="list-group-item pokemon">Electabuzz</button>
+      <button type="button" class="list-group-item pokemon">Magmar</button>
+      <button type="button" class="list-group-item pokemon">Pinsir</button>
+      <button type="button" class="list-group-item pokemon">Tauros</button>
+      <button type="button" class="list-group-item pokemon">Magikarp</button>
+      <button type="button" class="list-group-item pokemon">Gyarados</button>
+      <button type="button" class="list-group-item pokemon">Lapras</button>
+      <button type="button" class="list-group-item pokemon">Ditto</button>
+      <button type="button" class="list-group-item pokemon">Eevee</button>
+      <button type="button" class="list-group-item pokemon">Vaporeon</button>
+      <button type="button" class="list-group-item pokemon">Jolteon</button>
+      <button type="button" class="list-group-item pokemon">Flareon</button>
+      <button type="button" class="list-group-item pokemon">Porygon</button>
+      <button type="button" class="list-group-item pokemon">Omanyte</button>
+      <button type="button" class="list-group-item pokemon">Omastar</button>
+      <button type="button" class="list-group-item pokemon">Kabuto</button>
+      <button type="button" class="list-group-item pokemon">Kabutops</button>
+      <button type="button" class="list-group-item pokemon">Aerodactyl</button>
+      <button type="button" class="list-group-item pokemon">Snorlax</button>
+      <button type="button" class="list-group-item pokemon">Articuno</button>
+      <button type="button" class="list-group-item pokemon">Zapdos</button>
+      <button type="button" class="list-group-item pokemon">Moltres</button>
+      <button type="button" class="list-group-item pokemon">Dratini</button>
+      <button type="button" class="list-group-item pokemon">Dragonair</button>
+      <button type="button" class="list-group-item pokemon">Dragonite</button>
+      <button type="button" class="list-group-item pokemon">Mewtwo</button>
+      <button type="button" class="list-group-item pokemon">Mew</button>
+    </div>
+  </div>
+</div>

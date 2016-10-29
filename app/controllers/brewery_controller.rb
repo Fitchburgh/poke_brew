@@ -1,4 +1,4 @@
-# class BreweryController < ApplicationController
-#   def index
-#   end
-# end
+class BreweryController < ApplicationController
+  def index
+  end
+end
