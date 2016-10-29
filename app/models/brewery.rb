@@ -32,10 +32,11 @@ breweries = { 'Brews' =>
   ]}
 #
 class Brewery # < ApplicationRecord
-  attr_reader :name, :brewery_id
+  attr_reader :name, :brewery_id, :brewery_readout
   def initialize(options = {})
     @name = options['name']
     @brewery_id = options['breweries']['Brews'].first[@name]
+    @brewery_readout = {}
   end
 
   def name_check
@@ -44,15 +45,15 @@ class Brewery # < ApplicationRecord
 
   def write_to(object)
     if  object.name_check == true || Redis.current.get(@name) != nil
+      p 'in if'
     else
       BeerGetWorker.perform_async(@brewery_id)
+      p 'in else'
     end
-  end
-
-  def get_json(url)
-    temp = HTTParty.get(url).parsed_response
+    @brewery_readout = Redis.current.get(@name)
+    @brewery_readout = File.read("cache/brewery/#{name}.json") if @brewery_readout == {}
   end
 end
 
-fullsteam = Brewery.new({'name' => 'Fullsteam', 'breweries' => breweries})
-fullsteam.write_to(fullsteam)
+trophy = Brewery.new({'name' => 'Trophy', 'breweries' => breweries})
+trophy.write_to(trophy)

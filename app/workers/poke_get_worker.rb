@@ -1,10 +1,11 @@
 require 'sidekiq'
 require 'redis'
 require 'httparty'
-require 'json'
+
 #
 class PokeGetWorker
   include Sidekiq::Worker
+  sidekiq_options :retry => false
 
   def perform(pkmn_id, pkmn_name)
     p "yes m'Lord?"

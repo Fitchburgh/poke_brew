@@ -1,0 +1,23 @@
+Set up the config initializer with your environments.
+
+sidekiq.rb file.
+
+set the options for worker retry to false.
+
+
+http://redis.io/topics/rediscli
+
+http://stackoverflow.com/questions/14825565/sidekiq-deploy-to-multiple-environments
+
+https://github.com/mperham/sidekiq/wiki/Using-Redis
+
+http://stackoverflow.com/questions/17204826/sidekiq-jobs-stuck-in-enqueue
+
+http://stackoverflow.com/questions/21101253/how-to-delete-a-job-in-sidekiq
+
+http://stackoverflow.com/questions/12816226/sidekiq-worker-not-getting-triggered
+
+http://stackoverflow.com/questions/16835963/sidekiq-not-processing-queue
+
+
+make sure production developement and test environments all have the same config.mailer line

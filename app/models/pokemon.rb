@@ -1,6 +1,7 @@
 require 'json'
 require 'httparty'
 require 'redis'
+require_relative '../workers/poke_get_worker.rb'
 
 class Pokemon
   attr_reader :pkmn_name, :pkmn_id, :pkmn_readout
@@ -21,7 +22,6 @@ class Pokemon
   def write_to(pkmn_object)
     if pkmn_object.name_check == true || Redis.current.get(@pkmn_name) != nil
     else
-      binding.pry
       PokeGetWorker.perform_async(@pkmn_id, @pkmn_name)
     end
 
