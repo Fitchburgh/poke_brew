@@ -4,6 +4,7 @@ sidekiq.rb file.
 
 set the options for worker retry to false.
 
+require relative worker file at top if multiple workers.
 
 http://redis.io/topics/rediscli
 

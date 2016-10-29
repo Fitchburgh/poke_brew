@@ -14,18 +14,19 @@ class BeerGetWorker
     temp_beers = get_json("http://api.brewerydb.com/v2/brewery/#{brewery_id}/beers?key=3d5211aea4c0cb4c75f7dacac1d6734a")
     beers = []
 
-    4.times do
+    10.times do
       random = rand(temp_beers['data'].length)
       beers << random
+      beers.uniq
     end
 
-    name = temp_brewery['data']['nameShortDisplay']
+    brewery = temp_brewery['data']['nameShortDisplay']
 
     File.open("cache/brewery/#{temp_brewery['data']['nameShortDisplay']}.json", 'w+') do |f|
-      f.write([name = { "#{temp_beers['data'][beers[0]]['nameDisplay']}" => temp_beers['data'][beers[0]]['style']['ibuMin'] }, { "#{temp_beers['data'][beers[0]]['nameDisplay']}" => temp_beers['data'][beers[0]]['style']['ibuMax'] }, { "#{temp_beers['data'][beers[1]]['nameDisplay']}" => temp_beers['data'][beers[1]]['style']['ibuMin'] }, { "#{temp_beers['data'][beers[1]]['nameDisplay']}" => temp_beers['data'][beers[1]]['style']['ibuMax'] }, { "#{temp_beers['data'][beers[2]]['nameDisplay']}" => temp_beers['data'][beers[2]]['style']['ibuMin'] }, { 'third_max' => temp_beers['data'][beers[2]]['style']['ibuMax'] }, { "#{temp_beers['data'][beers[3]]['nameDisplay']}" => temp_beers['data'][beers[3]]['style']['ibuMin'] }, { "#{temp_beers['data'][beers[3]]['nameDisplay']}" => temp_beers['data'][beers[3]]['style']['ibuMax'] }]).to_json
+      f.write(brewery = { 'name' => "#{temp_brewery['data']['nameShortDisplay']}", 'attacks' => [{ "#{temp_beers['data'][beers[0]]['nameDisplay']}" => [temp_beers['data'][beers[0]]['style']['ibuMin'], temp_beers['data'][beers[0]]['style']['ibuMax'], temp_beers['data'][beers[0]]['abv']] }, { "#{temp_beers['data'][beers[1]]['nameDisplay']}" => [temp_beers['data'][beers[1]]['style']['ibuMin'], temp_beers['data'][beers[1]]['style']['ibuMax'], temp_beers['data'][beers[1]]['abv']] }, { "#{temp_beers['data'][beers[2]]['nameDisplay']}" => [temp_beers['data'][beers[2]]['style']['ibuMin'], temp_beers['data'][beers[2]]['style']['ibuMax'], temp_beers['data'][beers[2]]['abv']] }, { "#{temp_beers['data'][beers[3]]['nameDisplay']}" => [temp_beers['data'][beers[3]]['style']['ibuMin'], temp_beers['data'][beers[3]]['style']['ibuMax'], temp_beers['data'][beers[3]]['abv']] }] }).to_json
     end
 
-    Redis.current.set(name, [{ "#{temp_beers['data'][beers[0]]['nameDisplay']}" => temp_beers['data'][beers[0]]['style']['ibuMin'] }, { "#{temp_beers['data'][beers[0]]['nameDisplay']}" => temp_beers['data'][beers[0]]['style']['ibuMax'] }, { "#{temp_beers['data'][beers[1]]['nameDisplay']}" => temp_beers['data'][beers[1]]['style']['ibuMin'] }, { "#{temp_beers['data'][beers[1]]['nameDisplay']}" => temp_beers['data'][beers[1]]['style']['ibuMax'] }, { "#{temp_beers['data'][beers[2]]['nameDisplay']}" => temp_beers['data'][beers[2]]['style']['ibuMin'] }, { 'third_max' => temp_beers['data'][beers[2]]['style']['ibuMax'] }, { "#{temp_beers['data'][beers[3]]['nameDisplay']}" => temp_beers['data'][beers[3]]['style']['ibuMin'] }, { "#{temp_beers['data'][beers[3]]['nameDisplay']}" => temp_beers['data'][beers[3]]['style']['ibuMax'] }])
+    Redis.current.set("#{temp_brewery['data']['nameShortDisplay']}", { 'name' => "#{temp_brewery['data']['nameShortDisplay']}", 'attacks' => [{ "#{temp_beers['data'][beers[0]]['nameDisplay']}" => [temp_beers['data'][beers[0]]['style']['ibuMin'], temp_beers['data'][beers[0]]['style']['ibuMax'], temp_beers['data'][beers[0]]['abv']] }, { "#{temp_beers['data'][beers[1]]['nameDisplay']}" => [temp_beers['data'][beers[1]]['style']['ibuMin'], temp_beers['data'][beers[1]]['style']['ibuMax'], temp_beers['data'][beers[1]]['abv']] }, { "#{temp_beers['data'][beers[2]]['nameDisplay']}" => [temp_beers['data'][beers[2]]['style']['ibuMin'], temp_beers['data'][beers[2]]['style']['ibuMax'], temp_beers['data'][beers[2]]['abv']] }, { "#{temp_beers['data'][beers[3]]['nameDisplay']}" => [temp_beers['data'][beers[3]]['style']['ibuMin'], temp_beers['data'][beers[3]]['style']['ibuMax'], temp_beers['data'][beers[3]]['abv']] }] })
     p 'jobs done'
   end
 
@@ -40,3 +41,20 @@ end
 #  -12oz serving size
 #  -beer serving number
 #  -60 minutes
+
+
+
+# ([name = 'name' => "#{temp_beers['data'][beers[0]]['nameDisplay']}",
+#   { 'attacks' =>
+#     [{'attack_one' =>
+#       [temp_beers['data'][beers[0]]['style']['ibuMin'], temp_beers['data'][beers[0]]['style']['ibuMax']]
+#     },
+#     {'attack_two' =>
+#       [temp_beers['data'][beers[1]]['style']['ibuMin'], temp_beers['data'][beers[1]]['style']['ibuMax']]
+#     },
+#     {'attack_three' =>
+#       [temp_beers['data'][beers[2]]['style']['ibuMin'], temp_beers['data'][beers[2]]['style']['ibuMax']]
+#     },
+#     {'attack_four' =>
+#       [temp_beers['data'][beers[3]]['style']['ibuMin'], temp_beers['data'][beers[3]]['style']['ibuMax']]
+#     }]}]).to_json

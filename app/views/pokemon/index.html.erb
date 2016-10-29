@@ -1,7 +1,7 @@
 <h1>Pokemon#index</h1>
 <p>Find me in app/views/pokemon/index.html.erb</p>
 <div class="container">
-  <input type="text" class="form-control search-bar" autocomplete="off" id="pkmnSearch" placeholder="Enter a Unit Name...">
+  <input type="text" class="form-control search-bar" autocomplete="off" id="pkmnSearch" placeholder="Enter a Pokemon...">
   <ul class="">
 
 </div>
@@ -9,5 +9,11 @@
 <% pkmn_object = Pokemon.new('name' => 'zubat', 'list' => @poke_list)#, 'id_names' => pkmn_name_and_id) %>
 <% pkmn_object.write_to(pkmn_object) %>
 
+<% brewery_object = Brewery.new({'name' => 'DuClaw'}) %>
+<% brewery_object.write_to(brewery_object) %>
 
-<%= pkmn_object.pkmn_readout %>
+
+<ul>
+  <li><%= brewery_object.brewery_readout %></li>
+  <li><%= pkmn_object.pkmn_readout %></li>
+</ul>
