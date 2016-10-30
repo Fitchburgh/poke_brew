@@ -33,8 +33,3 @@ body.loading {
 body.loading .modal {
     display: block;
 }
-
-
-.ui-helper-hidden-accessible {
-  display: block;
-}

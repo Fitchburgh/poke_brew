@@ -18,8 +18,6 @@ $(document).ready(function () {
   var $brewerySearch = $('#brewerySearch');
   var $brewerySearchBtn = $('.brewery-search-btn');
 
-
-
   function getPokemonInfo(pokemon) {
     $.ajax({
       'url': '/pokemon/get?pokemon=' + encodeURIComponent(pokemon), //'/brewery/index',
@@ -39,7 +37,7 @@ $(document).ready(function () {
           }, 1000);
         } else {
           pokemon = JSON.parse(pokemon);
-          PokemonDetails(pokemon)
+          PokemonDetails(pokemon);
         }
         //make brewery API call here and assign the attacks to the beers. then spit out the full object.  YAY!!!!
         // need to do something with pokemon.
@@ -52,12 +50,12 @@ $(document).ready(function () {
   }
 
   // pokemon constructor
-  function PokemonDetails(selected) {
+  function PokemonDetails(pokeSelect) {
     this.info = {
-        pokemonName: selected.name,
-        pokemonWeight: selected.weight,
-        pokemonType: selected.type.type.name,
-        pokemonAttackOne: selected.attacks.attack_one,
+        pokemonName: pokeSelect.name,
+        pokemonWeight: pokeSelect.weight,
+        pokemonType: pokeSelect.type.type.name,
+        pokemonAttackOne: pokeSelect.attacks.attack_one,
         // pokemonAttackTwo: asdf, //this needs to be the beer
         // pokemonAttackThree: asdf,
         // pokemonAttackFour: asdf
@@ -83,18 +81,54 @@ $(document).ready(function () {
 
   function getBeerAttacks(brewery) {
     $.ajax({
-      'url': '/brewery/get?utf8=%E2%9C%93&brewery=' + encodeURIComponent(brewery) + '&commit=Submit',
+      'url': '/brewery/get?brewery=' + encodeURIComponent(brewery),//'/brewery/get?utf8=%E2%9C%93&brewery=' + encodeURIComponent(brewery) + '&commit=Submit',
       'method': 'GET',
       'data': {},
       'dataType': 'json',
       'success': function(brewery) {
-        console.log(brewery);
+        localStorage.getItem("breweryName");
+        brewery = JSON.parse(brewery);
+        BeerDetails(brewery);
+        // $brewerySearchBtn.attr('disabled', true);
       },
       'error': function(error) {
         alert(error);
         console.log('help me, computer!');
       }
     });
+  }
+
+  // Storing the data:
+  // localStorage.setItem("variableName","Text");
+  // Receiving the data:
+  // localStorage.getItem("variableName");
+
+  // beer constructor
+  function BeerDetails(beerSelect) {
+    this.info = {
+        breweryName: beerSelect.name,
+        beerAttackOne: beerSelect.attacks[0].first,
+        beerAttackTwo: beerSelect.attacks[0].second,
+        beerAttackThree: beerSelect.attacks[0].third,
+        beerAttackFour: beerSelect.attacks[0].fourth,
+    };
+    localStorage.setItem('breweryName', beerSelect.name);
+
+    var brewerySelection = $("<div>").attr('class', this.info.breweryName);
+    var breweryName = $("<p>").addClass('selectedBrewery').attr("id", 'brewery').html(this.info.breweryName).appendTo(brewerySelection);
+    var beerAttackOne = $("<p>").addClass('').attr("id", 'attackOne').html(this.info.beerAttackOne).appendTo(brewerySelection);
+    var beerAttackTwo = $("<p>").addClass('').attr("id", 'attackTwo').html(this.info.beerAttackTwo).appendTo(brewerySelection);
+    var beerAttackThree = $("<p>").addClass('').attr("id", 'attackThree').html(this.info.beerAttackThree).appendTo(brewerySelection);
+    var beerAttackFour = $("<p>").addClass('').attr("id", 'attackFour').html(this.info.beerAttackFour).appendTo(brewerySelection);
+
+    $(brewerySelection).insertAfter(".main-body");
+    // $(breweryName).insertAfter(".selectedBrewery");
+    // this.MagicElements = function(selected) {
+    //     var context = {
+    //         pokemonName: this.info.name,
+    //     };
+    // };
+    // this.MagicElements(selected);
   }
 
   $( function() {
@@ -277,10 +311,10 @@ $(document).ready(function () {
 
 
   $brewerySearchBtn.on('click', function() {
-    $brewerySearchBtn.attr('disabled', true);
+
     var brewery = $brewerySearch.val();
     getBeerAttacks(brewery);
-
+    return false;
     // window.location.href = '/brewery/get?brewery=' + encodeURIComponent(brewery);
   });
 
