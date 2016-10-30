@@ -10,5 +10,11 @@ Rails.application.routes.draw do
 
   get 'pokemon/redirect'
 
+  get 'pokemon/get'
+
+  get 'brewery/get'
+
+  get 'brewery/select'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

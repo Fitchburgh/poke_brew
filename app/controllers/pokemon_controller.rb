@@ -8,7 +8,7 @@ class PokemonController < ApplicationController
 
   end
 
-  def submit
+  def get
     pkmn_object = Pokemon.new('name' => params[:pokemon], 'list' => '')
 
     pkmn_object.write_to(pkmn_object)

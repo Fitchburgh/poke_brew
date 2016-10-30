@@ -1,2 +1,13 @@
 <h1>Brewery#index</h1>
 <p>Find me in app/views/brewery/index.html.erb</p>
+
+<p>
+  bewbs
+</p>
+
+
+<%= form_tag('/brewery/select', method: "get", class: "beerSearch") do %>
+  <%= label_tag(:brewery, "Search for:") %>
+  <%= text_field_tag(:brewery) %>
+  <%= submit_tag("Submit", class: "beerSubmit") %>
+<% end %>
