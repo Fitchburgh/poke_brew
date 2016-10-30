@@ -55,23 +55,20 @@ $(document).ready(function () {
         pokemonName: pokeSelect.name,
         pokemonWeight: pokeSelect.weight,
         pokemonType: pokeSelect.type.type.name,
-        pokemonAttackOne: pokeSelect.attacks.attack_one,
+        pokemonAttacks: pokeSelect.attacks,
         // pokemonAttackTwo: asdf, //this needs to be the beer
         // pokemonAttackThree: asdf,
         // pokemonAttackFour: asdf
     };
+    localStorage.setItem('pokemonName', pokeSelect.name);
+    localStorage.setItem('pokemonWeight', pokeSelect.weight);
+    localStorage.setItem('pokemonType', pokeSelect.type.type.name);
+    localStorage.setItem('pokemonAttacks', pokeSelect.attacks);
 
     var pokemonSelection = $("<div>").attr('class', this.info.pokemonName);
     var pokemonName = $("<p>").addClass('selectedPokemon').attr("id", this.info.pokemonName).html(this.info.pokemonName).appendTo(pokemonSelection);
 
     $(pokemonSelection).insertAfter(".main-body");
-
-    // this.MagicElements = function(selected) {
-    //     var context = {
-    //         pokemonName: this.info.name,
-    //     };
-    // };
-    // this.MagicElements(selected);
   }
 
   // setTimeout(function(pokemon) {
@@ -86,7 +83,7 @@ $(document).ready(function () {
       'data': {},
       'dataType': 'json',
       'success': function(brewery) {
-        localStorage.getItem("breweryName");
+        localStorage.getItem("pokemonName");
         brewery = JSON.parse(brewery);
         BeerDetails(brewery);
         // $brewerySearchBtn.attr('disabled', true);
@@ -122,13 +119,6 @@ $(document).ready(function () {
     var beerAttackFour = $("<p>").addClass('').attr("id", 'attackFour').html(this.info.beerAttackFour).appendTo(brewerySelection);
 
     $(brewerySelection).insertAfter(".main-body");
-    // $(breweryName).insertAfter(".selectedBrewery");
-    // this.MagicElements = function(selected) {
-    //     var context = {
-    //         pokemonName: this.info.name,
-    //     };
-    // };
-    // this.MagicElements(selected);
   }
 
   $( function() {
@@ -305,6 +295,7 @@ $(document).ready(function () {
       // maybe add a delay here or some ajax polling - whatever that is.
 
       getPokemonInfo(pokemon);
+      window.location.href = '/brewery/index'
       return false;
     });
   });
