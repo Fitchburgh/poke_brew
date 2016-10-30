@@ -1,11 +1,24 @@
 console.log('hi mom');
 
+
+
 $(document).ready(function () {
   console.log('ready');
 
+  // beer loading whenever ajax calls are started
+  $body = $("body");
+  $(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+    ajaxStop: function() { $body.removeClass("loading"); }
+  });
+
   var $pkmnSearch = $('#pkmnSearch');
   var $pkmnSearchBtn = $('.pkmn-search-btn');
-  var pokemonInfo = '';
+
+  var $brewerySearch = $('#brewerySearch');
+  var $brewerySearchBtn = $('.brewery-search-btn');
+
+
 
   function getPokemonInfo(pokemon) {
     $.ajax({
@@ -14,10 +27,21 @@ $(document).ready(function () {
       "data": {},
       'dataType': 'json',
       'success': function(pokemon) {
-        var pokemon = JSON.parse(pokemon)
-        //make brewery API call here and assign the attacks to the beers. then spit out the full object.  YAY!!!!
-        console.log(pokemon.attacks[0]);
+        $pkmnSearchBtn.attr('disabled', true);
 
+        if (pokemon === null) {
+          setTimeout(function(pokemon) {
+
+            $pkmnSearchBtn.attr('disabled', false);
+
+            // $pkmnSearchBtn.trigger('click');
+
+          }, 1000);
+        } else {
+          pokemon = JSON.parse(pokemon);
+          PokemonDetails(pokemon)
+        }
+        //make brewery API call here and assign the attacks to the beers. then spit out the full object.  YAY!!!!
         // need to do something with pokemon.
       },
       'error': function(error) {
@@ -27,10 +51,39 @@ $(document).ready(function () {
     });
   }
 
-  function getBeerAttacks() {
-    var beerSearch = $('.beerSearch').val("");
+  // pokemon constructor
+  function PokemonDetails(selected) {
+    this.info = {
+        pokemonName: selected.name,
+        pokemonWeight: selected.weight,
+        pokemonType: selected.type.type.name,
+        pokemonAttackOne: selected.attacks.attack_one,
+        // pokemonAttackTwo: asdf, //this needs to be the beer
+        // pokemonAttackThree: asdf,
+        // pokemonAttackFour: asdf
+    };
+
+    var pokemonSelection = $("<div>").attr('class', this.info.pokemonName);
+    var pokemonName = $("<p>").addClass('selectedPokemon').attr("id", this.info.pokemonName).html(this.info.pokemonName).appendTo(pokemonSelection);
+
+    $(pokemonSelection).insertAfter(".main-body");
+
+    // this.MagicElements = function(selected) {
+    //     var context = {
+    //         pokemonName: this.info.name,
+    //     };
+    // };
+    // this.MagicElements(selected);
+  }
+
+  // setTimeout(function(pokemon) {
+  //   location.reload();
+  //   getPokemonInfo(pokemon);
+  // }, 3000),
+
+  function getBeerAttacks(brewery) {
     $.ajax({
-      'url': '/brewery/select?utf8=%E2%9C%93&brewery=' + encodeURIComponent(beerSearch) + '&commit=Submit',
+      'url': '/brewery/get?utf8=%E2%9C%93&brewery=' + encodeURIComponent(brewery) + '&commit=Submit',
       'method': 'GET',
       'data': {},
       'dataType': 'json',
@@ -43,43 +96,6 @@ $(document).ready(function () {
       }
     });
   }
-
-
-  // here's my attempt at polling...
-  // (function poll(pokemon) {
-  //   setTimeout(function(pokemon) {
-  //     $.ajax({
-  //       'url': '/pokemon/submit?pokemon=' + encodeURIComponent(pokemon),
-  //       'method': "GET",
-  //       'success': function(pokemon) {
-  //         JSON.parse(pokemon)
-  //       // check if null return (no results from API)
-  //         if (pokemon === null) {
-  //           console.log('no data!');
-  //         } else {
-  // prob need to modify this part further
-  //           $.each(pokemon, function(index, element) {
-  //             arrayName.push([element.whatever1, element.whatever2]);
-  //              // cycle through internal array to see if match, or existing coordinates
-  //             for (var i = 0; i < arrayName.length; i++) {
-  //               // check if new data received matches what is in internal array
-  //               if (arrayName[i][0] === element.whatever1 && arrayName[i][1] === element.whatever2) {
-  //                 console.log('data received is already in array .. skipping');
-  //               } else {
-  //                 console.log('new data!');
-  //               }
-  //               console.log(pokemon.attacks[0]);
-  //             }
-  //
-  //           });
-  //         }
-  //       },
-  //       'dataType': "json",
-  //       'complete': poll,
-  //       'timeout': 2000
-  //     });
-  //     }, 3000);
-  //   })();
 
   $( function() {
       var availableTags = [
@@ -249,9 +265,9 @@ $(document).ready(function () {
         return !~text.indexOf(val);
     }).hide();
     $pkmnSearchBtn.on('click', function() {
-      $pkmnSearchBtn.attr('disabled', true);
+      // $pkmnSearchBtn.attr('disabled', true);
       var pokemon = $pkmnSearch.val();
-      window.location.href = '/pokemon/get?pokemon=' + encodeURIComponent(pokemon);
+      // window.location.href = '/pokemon/get?pokemon=' + encodeURIComponent(pokemon);
       // maybe add a delay here or some ajax polling - whatever that is.
 
       getPokemonInfo(pokemon);
@@ -259,4 +275,33 @@ $(document).ready(function () {
     });
   });
 
+
+  $brewerySearchBtn.on('click', function() {
+    $brewerySearchBtn.attr('disabled', true);
+    var brewery = $brewerySearch.val();
+    getBeerAttacks(brewery);
+
+    // window.location.href = '/brewery/get?brewery=' + encodeURIComponent(brewery);
+  });
+
 });
+
+
+
+
+// (function poll(pokemon) {
+//   setTimeout(function() {
+//     $.ajax({
+//       'url': '/pokemon/get?pokemon=' + encodeURIComponent(pokemon), //'/brewery/index',
+//       'method': 'GET',
+//       'success': function(pokemon) {
+//         $pkmnSearchBtn.attr('disabled', true);
+//         JSON.parse(pokemon);
+//         console.log(pokemon.attacks[0]);
+//       },
+//       'dataType': 'json',
+//       'complete': poll,
+//       'timeout': 2000
+//     });
+//   }, 5000);
+// })();

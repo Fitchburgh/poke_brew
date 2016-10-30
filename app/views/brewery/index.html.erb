@@ -1,13 +1,8 @@
 <h1>Brewery#index</h1>
 <p>Find me in app/views/brewery/index.html.erb</p>
 
-<p>
-  bewbs
-</p>
-
-
-<%= form_tag('/brewery/select', method: "get", class: "beerSearch") do %>
-  <%= label_tag(:brewery, "Search for:") %>
-  <%= text_field_tag(:brewery) %>
-  <%= submit_tag("Submit", class: "beerSubmit") %>
-<% end %>
+<div class="container main-body">
+  <input type="text" class="form-control search-bar col-sm-3" autocomplete="off" id="brewerySearch" placeholder="Enter a Brewery..."></input>
+  <button type="submit" class="btn btn-default brewery-search-btn col-md-1">Submit</button>
+</div>
+<br />
