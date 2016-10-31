@@ -39,8 +39,6 @@ $(document).ready(function () {
           pokemon = JSON.parse(pokemon);
           PokemonDetails(pokemon);
         }
-        //make brewery API call here and assign the attacks to the beers. then spit out the full object.  YAY!!!!
-        // need to do something with pokemon.
       },
       'error': function(error) {
         alert(error);
@@ -83,9 +81,22 @@ $(document).ready(function () {
       'data': {},
       'dataType': 'json',
       'success': function(brewery) {
-        localStorage.getItem("pokemonName");
-        brewery = JSON.parse(brewery);
-        BeerDetails(brewery);
+        $pkmnSearchBtn.attr('disabled', true);
+
+        if (pokemon === null) {
+          setTimeout(function(pokemon) {
+
+            $pkmnSearchBtn.attr('disabled', false);
+
+            // $pkmnSearchBtn.trigger('click');
+
+          }, 1000);
+        } else {
+          brewery = JSON.parse(brewery);
+          BeerDetails(brewery);
+        }
+        //make brewery API call here and assign the attacks to the beers. then spit out the full object.  YAY!!!!
+        // need to do something with pokemon.
         // $brewerySearchBtn.attr('disabled', true);
       },
       'error': function(error) {
@@ -110,6 +121,10 @@ $(document).ready(function () {
         beerAttackFour: beerSelect.attacks[0].fourth,
     };
     localStorage.setItem('breweryName', beerSelect.name);
+    localStorage.setItem('beerAttackOne', beerSelect.attacks[0].first);
+    localStorage.setItem('beerAttackTwo', beerSelect.attacks[0].second);
+    localStorage.setItem('beerAttackThree', beerSelect.attacks[0].third);
+    localStorage.setItem('beerAttackFour', beerSelect.attacks[0].fourth);
 
     var brewerySelection = $("<div>").attr('class', this.info.breweryName);
     var breweryName = $("<p>").addClass('selectedBrewery').attr("id", 'brewery').html(this.info.breweryName).appendTo(brewerySelection);
