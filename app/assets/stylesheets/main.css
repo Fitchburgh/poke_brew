@@ -11,8 +11,14 @@
   background-color: rgba(53, 199, 136, 1);
 }
 
+.battle-btn {
+  padding: 35px 50px;
+  width: 100%;
+}
 
-
+.ready-screen-btn {
+  width: 100%;
+}
 
 
 
@@ -28,57 +34,56 @@
 }
 
 .btn {
-    padding: 7px 9px;
-    border: 0 none;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+  padding: 7px 9px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus {
-    outline: 0 none;
+  outline: 0 none;
 }
 
 .btn-primary {
-    background: #0099cc;
-    color: #ffffff;
+  background: #0099cc;
+  color: #ffffff;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: #33a6cc;
+  background: #33a6cc;
 }
 
 .btn-primary:active, .btn-primary.active {
-    background: #007299;
-    box-shadow: none;
+  background: #007299;
+  box-shadow: none;
 }
 
 
 .modal {
-    display:    none;
-    position:   fixed;
-    z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .8 )
-
-                url('loader.gif')
-                50% 50%
-                no-repeat;
+  display:    none;
+  position:   fixed;
+  z-index:    1000;
+  top:        0;
+  left:       0;
+  height:     100%;
+  width:      100%;
+  background: rgba( 255, 255, 255, .8 )
+              url('loader.gif')
+              50% 50%
+              no-repeat;
 }
 
 /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
 body.loading {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 /* Anytime the body has the loading class, our
    modal element will be visible */
 body.loading .modal {
-    display: block;
+  display: block;
 }
 /*
 body {

@@ -111,7 +111,7 @@ $(document).ready(function () {
     var key = event.keyCode;
     // 37 is left arrow
     if (key === 37 && userCanAttack) {
-      console.log("Left key!");
+      console.log("ATTACK!");
       console.log(localStorage.getItem('breweryName'));
       userCanAttack = false;
       setTimeout(function() {
@@ -136,10 +136,25 @@ $(document).ready(function () {
         beerAttackFour: fourthAttack,
     };
     localStorage.setItem('breweryName', beerSelect.name);
-    localStorage.setItem('beerAttackOne', beerSelect.attacks[0].first);
-    localStorage.setItem('beerAttackTwo', beerSelect.attacks[0].second);
-    localStorage.setItem('beerAttackThree', beerSelect.attacks[0].third);
-    localStorage.setItem('beerAttackFour', beerSelect.attacks[0].fourth);
+    localStorage.setItem('beerAttackOne', beerSelect.attacks[0].first[0]);
+    localStorage.setItem('beerAttackTwo', beerSelect.attacks[0].second[0]);
+    localStorage.setItem('beerAttackThree', beerSelect.attacks[0].third[0]);
+    localStorage.setItem('beerAttackFour', beerSelect.attacks[0].fourth[0]);
+
+    localStorage.setItem('baseDamageOne', beerSelect.attacks[0].first[1][0]);
+    localStorage.setItem('baseDamageTwo', beerSelect.attacks[0].second[1][0]);
+    localStorage.setItem('baseDamageThree', beerSelect.attacks[0].third[1][0]);
+    localStorage.setItem('baseDamageFour', beerSelect.attacks[0].fourth[1][0]);
+
+    localStorage.setItem('critDamageOne', beerSelect.attacks[0].first[1][1]);
+    localStorage.setItem('critDamageTwo', beerSelect.attacks[0].second[1][1]);
+    localStorage.setItem('critDamageThree', beerSelect.attacks[0].third[1][1]);
+    localStorage.setItem('critDamageFour', beerSelect.attacks[0].fourth[1][1]);
+
+    localStorage.setItem('critChanceOne', beerSelect.attacks[0].first[1][2]);
+    localStorage.setItem('critChanceTwo', beerSelect.attacks[0].second[1][2]);
+    localStorage.setItem('critChanceThree', beerSelect.attacks[0].third[1][2]);
+    localStorage.setItem('critChanceFour', beerSelect.attacks[0].fourth[1][2]);
 
     var brewerySelection = $('.breweryName').attr('id', this.info.breweryName);
     var beerNames = $('.beerNames');
