@@ -106,21 +106,135 @@ $(document).ready(function () {
   // setInterval will be used for the AI
   var userCanAttack = true;
 
-  $(document).on('keyup', function(event) {
+  var userPokemon = localStorage.getItem('pokemonName');
+  var userPokemonTP = localStorage.getItem('pokemonWeight');
 
+  var userAttackOne = localStorage.getItem('beerAttackOne');
+  var userAttackTwo = localStorage.getItem('beerAttackTwo');
+  var userAttackThree = localStorage.getItem('beerAttackThree');
+  var userAttackFour = localStorage.getItem('beerAttackFour');
+
+  var userDamageOne  = localStorage.getItem('baseDamageOne');
+  var userDamageTwo  = localStorage.getItem('baseDamageTwo');
+  var userDamageThree  = localStorage.getItem('baseDamageThree');
+  var userDamageFour  = localStorage.getItem('baseDamageFour');
+
+  var userCritOne = localStorage.getItem('critDamageOne');
+  var userCritTwo = localStorage.getItem('critDamageTwo');
+  var userCritThree = localStorage.getItem('critDamageThree');
+  var userCritFour = localStorage.getItem('critDamageFour');
+
+  var userCritChanceOne = localStorage.getItem('critChanceOne');
+  var userCritChanceTwo = localStorage.getItem('critChanceTwo');
+  var userCritChanceThree = localStorage.getItem('critChanceThree');
+  var userCritChanceFour = localStorage.getItem('critChanceFour');
+
+  var computerPokemon = {'Pokemon': 'togepi', 'health': 200, 'attack': 25};
+// after each attack reset value to localstorage reassign the new value of pokemon weight
+//target the html elemtn that contains the weight and change its value to the math here.
+// beer1 ibumin subtracted from health
+// can change document to be the play screen page
+  $(document).on('keyup', function(event) {
     var key = event.keyCode;
     // 37 is left arrow
     if (key === 37 && userCanAttack) {
-      console.log("ATTACK!");
-      console.log(localStorage.getItem('breweryName'));
+      if ((Math.random()*50) <= userCritChanceOne) {
+        var damage = userCritOne;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      } else {
+        var damage = userDamageOne;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      }
       userCanAttack = false;
       setTimeout(function() {
         userCanAttack = true;
       }, 3000);
-      //target the html elemtn that contains the weight and change its value to the math here.
-      // beer1 ibumin subtracted from health
+    } else if (key === 38 && userCanAttack) {
+      if ((Math.random()*50) <= userCritChanceTwo) {
+        var damage = userCritTwo;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      } else ;{
+        var damage = userDamageTwo;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      }
+      userCanAttack = false;
+      setTimeout(function() {
+        userCanAttack = true;
+      }, 3000);
+    } else if (key === 39 && userCanAttack) {
+      if ((Math.random()*50) <= userCritChanceThree) {
+        var damage = userCritThree;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      } else ;{
+        var damage = userDamageThree;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      }
+      userCanAttack = false;
+      setTimeout(function() {
+        userCanAttack = true;
+      }, 3000);
+    } else if (key === 40 && userCanAttack) {
+      if ((Math.random()*50) <= userCritChanceFour) {
+        var damage = userCritFour;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      } else ;{
+        var damage = userDamageFour;
+        if (computerPokemon.health - damage > 0) {
+          computerPokemon.health -= damage;
+          console.log(computerPokemon.health);
+        } else {
+          computerPokemon.heath = 0;
+          alert('You win!');
+        }
+      }
+      userCanAttack = false;
+      setTimeout(function() {
+        userCanAttack = true;
+      }, 3000);
     }
-  }); //document is whole page, can be changed
+  });
 
   // beer constructor
   function BeerDetails(beerSelect) {
@@ -136,10 +250,10 @@ $(document).ready(function () {
         beerAttackFour: fourthAttack,
     };
     localStorage.setItem('breweryName', beerSelect.name);
-    localStorage.setItem('beerAttackOne', beerSelect.attacks[0].first[0]);
-    localStorage.setItem('beerAttackTwo', beerSelect.attacks[0].second[0]);
-    localStorage.setItem('beerAttackThree', beerSelect.attacks[0].third[0]);
-    localStorage.setItem('beerAttackFour', beerSelect.attacks[0].fourth[0]);
+    localStorage.setItem('beerAttackOne', beerSelect.attacks[0].first);
+    localStorage.setItem('beerAttackTwo', beerSelect.attacks[0].second);
+    localStorage.setItem('beerAttackThree', beerSelect.attacks[0].third);
+    localStorage.setItem('beerAttackFour', beerSelect.attacks[0].fourth);
 
     localStorage.setItem('baseDamageOne', beerSelect.attacks[0].first[1][0]);
     localStorage.setItem('baseDamageTwo', beerSelect.attacks[0].second[1][0]);
