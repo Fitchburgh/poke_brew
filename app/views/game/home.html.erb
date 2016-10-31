@@ -1,0 +1,15 @@
+<div class"container">
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="/game/home">Home</a></li>
+    <li role="presentation"><a href="/pokemon/index">New Pokemon</a></li>
+    <li role="presentation"><a href="#">Messages</a></li>
+    <li>
+      <%= button_to "Log Out", destroy_trainer_session_path, method: :delete, :class => 'logout', role: 'presentation'%>
+    </li>
+  </ul>
+</div>
+
+<h1>Game#home</h1>
+<p>Find me in app/views/game/home.html.erb</p>
+
+<h2> Options </h2>

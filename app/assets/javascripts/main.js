@@ -1,6 +1,9 @@
 console.log('hi mom');
 
-
+// Storing the data:
+// localStorage.setItem("variableName","Text");
+// Receiving the data:
+// localStorage.getItem("variableName");
 
 $(document).ready(function () {
   console.log('ready');
@@ -12,11 +15,15 @@ $(document).ready(function () {
     ajaxStop: function() { $body.removeClass("loading"); }
   });
 
+  var $logout = $('.logout');
+
   var $pkmnSearch = $('#pkmnSearch');
   var $pkmnSearchBtn = $('.pkmn-search-btn');
 
   var $brewerySearch = $('#brewerySearch');
   var $brewerySearchBtn = $('.brewery-search-btn');
+
+
 
   function getPokemonInfo(pokemon) {
     $.ajax({
@@ -83,21 +90,17 @@ $(document).ready(function () {
       'success': function(brewery) {
         $pkmnSearchBtn.attr('disabled', true);
 
-        if (pokemon === null) {
-          setTimeout(function(pokemon) {
-
-            $pkmnSearchBtn.attr('disabled', false);
-
-            // $pkmnSearchBtn.trigger('click');
-
+        if (brewery === null) {
+          setTimeout(function(brewery) {
+            $brewerySearchBtn.attr('disabled', false);
           }, 1000);
+
         } else {
           brewery = JSON.parse(brewery);
           BeerDetails(brewery);
+          console.log(localStorage.getItem('pokemonName'));
+          // call a function to Construct a panel view for pokemon and its new attacks.
         }
-        //make brewery API call here and assign the attacks to the beers. then spit out the full object.  YAY!!!!
-        // need to do something with pokemon.
-        // $brewerySearchBtn.attr('disabled', true);
       },
       'error': function(error) {
         alert(error);
@@ -106,10 +109,7 @@ $(document).ready(function () {
     });
   }
 
-  // Storing the data:
-  // localStorage.setItem("variableName","Text");
-  // Receiving the data:
-  // localStorage.getItem("variableName");
+
 
   // beer constructor
   function BeerDetails(beerSelect) {
@@ -135,6 +135,82 @@ $(document).ready(function () {
 
     $(brewerySelection).insertAfter(".main-body");
   }
+
+
+
+  $pkmnSearch.keyup(function() {
+    var pokemon = $pkmnSearch.val();
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    $('.pokemon').show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+    $pkmnSearchBtn.on('click', function() {
+      // $pkmnSearchBtn.attr('disabled', true);
+      var pokemon = $pkmnSearch.val();
+      // window.location.href = '/pokemon/get?pokemon=' + encodeURIComponent(pokemon);
+      // maybe add a delay here or some ajax polling - whatever that is.
+
+      getPokemonInfo(pokemon);
+      window.location.href = '/brewery/index';
+      return false;
+    });
+  });
+
+  // $logout.on('click', function(error) {
+  //   alert('Are you sure? This will wipe your session.');
+  //
+  // });
+
+  $(function(){
+    $logout.click(function(){
+      if(confirm('Logging out will wipe your Pokemon picks...')) {
+        localStorage.clear();
+        return true;
+      }
+      return false;
+    });
+  });
+
+  $brewerySearchBtn.on('click', function() {
+
+    var brewery = $brewerySearch.val();
+    getBeerAttacks(brewery);
+    // window.location.href = '/game/loadout'
+    return false;
+    // window.location.href = '/brewery/get?brewery=' + encodeURIComponent(brewery);
+  });
+
+
+  $( function() {
+      var availableTags = [
+      'Lonerider',
+      'Raleigh',
+      'Surly',
+      'Gizmo Brew Works',
+      'Bull City Burger',
+      'Trophy',
+      'Fullsteam',
+      'Deep River',
+      'Hi-Wire',
+      'Palmetto',
+      'Big Boss',
+      'Mother Earth',
+      'Bond Brothers',
+      'The Duck-Rabbit Craft',
+      'Anderson Valley',
+      'Cisco Brewers',
+      'Westbrook',
+      'DuClaw',
+      'Jailbreak',
+      'New Belgium',
+      'Cigar City'
+    ];
+    $brewerySearch.autocomplete({
+      source: availableTags
+    });
+  } );
 
   $( function() {
       var availableTags = [
@@ -294,35 +370,6 @@ $(document).ready(function () {
       source: availableTags
     });
   } );
-
-  $pkmnSearch.keyup(function() {
-    var pokemon = $pkmnSearch.val();
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-    $('.pokemon').show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-    $pkmnSearchBtn.on('click', function() {
-      // $pkmnSearchBtn.attr('disabled', true);
-      var pokemon = $pkmnSearch.val();
-      // window.location.href = '/pokemon/get?pokemon=' + encodeURIComponent(pokemon);
-      // maybe add a delay here or some ajax polling - whatever that is.
-
-      getPokemonInfo(pokemon);
-      window.location.href = '/brewery/index'
-      return false;
-    });
-  });
-
-
-  $brewerySearchBtn.on('click', function() {
-
-    var brewery = $brewerySearch.val();
-    getBeerAttacks(brewery);
-    return false;
-    // window.location.href = '/brewery/get?brewery=' + encodeURIComponent(brewery);
-  });
 
 });
 

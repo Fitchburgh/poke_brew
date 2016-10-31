@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   get 'game/index'
 
   devise_for :trainers
-  root to: 'pokemon#index'
+  # root to: 'pokemon#index'
+  root to: 'game#home'
 
   get 'brewery/index'
 
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
   get 'brewery/select'
 
   get 'game/new'
+
+  get 'game/loadout'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
