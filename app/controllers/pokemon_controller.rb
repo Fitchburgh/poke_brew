@@ -10,7 +10,7 @@ class PokemonController < ApplicationController
     pkmn_object.write_to(pkmn_object)
     respond_to do |format|
       format.json { render json: pkmn_object.pkmn_readout.to_json }
-      format.html { redirect_to '/brewery/index' }
+      format.html { redirect_to '/pokemon/index' }
     end
   end
 end

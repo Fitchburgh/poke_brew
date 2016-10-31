@@ -19,7 +19,7 @@ class BeerGetWorker
       beers << random
       beers.uniq
     end
-
+# need to validate that each part is not nil - I got a beer back that had nil for ibu's
     brewery = temp_brewery['data']['nameShortDisplay']
 
     File.open("cache/brewery/#{temp_brewery['data']['nameShortDisplay']}.json", 'w+') do |f|
