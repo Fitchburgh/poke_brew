@@ -11,6 +11,8 @@ body {
 
 }
 
+
+
 .display-current-btn {
 
 }
@@ -43,7 +45,7 @@ body {
 }
 
 
-.text-center {
+.text-center, .battle-board-container {
   text-align: center;
 }
 
@@ -93,11 +95,6 @@ body {
         opacity: 1.0;
     }
 }
-
-
-
-
-
 
 .sharp {
   border-radius:0;
@@ -155,8 +152,13 @@ body.loading {
 body.loading .modal {
   display: block;
 }
-/*
-body {
-  background-image: url('background.png');
-  background-size: cover;
-}*/
+
+.pic {
+  background-image: url('playfield.png');
+  height: 100vh;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%)
+}

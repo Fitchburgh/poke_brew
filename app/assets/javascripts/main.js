@@ -1,13 +1,4 @@
-
-
-// Storing the data:
-// localStorage.setItem("variableName","Text");
-// Receiving the data:
-// localStorage.getItem("variableName");
-
 $(document).ready(function () {
-  console.log('ready');
-
   // beer loading whenever ajax calls are started
   $body = $("body");
   $(document).on({
@@ -137,20 +128,36 @@ $(document).ready(function () {
 
   // setInterval will be used for the AI
   var userCanAttack = true;
+  var computerCanAttack = false;
 
 
-// after each attack reset value to localstorage reassign the new value of pokemon weight
-//target the html elemtn that contains the weight and change its value to the math here.
-// beer1 ibumin subtracted from health
-// can change document to be the play screen page
+  setTimeout(function() {
+    $('.countdown').fadeOut('slow');
+  }, 2500);
+
   $(document).on('keyup', function(event) {
+    // setInterval(function() {
+    //   if (computerCanAttack && userPokemonTP >= 1) {
+    //     userPokemonTP -= compDamage;
+    //     console.log('user tp: ', userPokemonTP);
+    //   } else if (userPokemonTP <= 0) {
+    //     alert('I remember my first beer...');
+    //   }
+    //   computerCanAttack = false;
+    //   console.log('user tp: ', userPokemonTP);
+    //   }, 2000);
+    var $damageSlider = $('.damageSlider');
+    var $enemyHealth = $('.enemyHealth');
     var key = event.keyCode;
-    // 37 is left arrow
-    if (key === 37 && userCanAttack) {
+    // number 1 button is 49
+    if (key === 49 && userCanAttack) {
       if ((Math.random()*50) <= userCritChanceOne) {
         var damage = userCritOne;
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
+          $('<li>').attr("id", userPokemon).html(computerPokemon.health).appendTo($enemyHealth);
+// I'm trying to get damage on the screen by appending list items.
+          // $('#userPokemon').slideUp(1500);
           console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
@@ -169,8 +176,10 @@ $(document).ready(function () {
       userCanAttack = false;
       setTimeout(function() {
         userCanAttack = true;
-      }, 3000);
-    } else if (key === 38 && userCanAttack) {
+      }, 2000);
+
+    // number 2 button is 50
+    } else if (key === 50 && userCanAttack) {
       if ((Math.random()*50) <= userCritChanceTwo) {
         var damage = userCritTwo;
         if (computerPokemon.health - damage > 0) {
@@ -193,8 +202,10 @@ $(document).ready(function () {
       userCanAttack = false;
       setTimeout(function() {
         userCanAttack = true;
-      }, 3000);
-    } else if (key === 39 && userCanAttack) {
+      }, 2000);
+
+    // number 3 button is 51
+    } else if (key === 51 && userCanAttack) {
       if ((Math.random()*50) <= userCritChanceThree) {
         var damage = userCritThree;
         if (computerPokemon.health - damage > 0) {
@@ -217,8 +228,10 @@ $(document).ready(function () {
       userCanAttack = false;
       setTimeout(function() {
         userCanAttack = true;
-      }, 3000);
-    } else if (key === 40 && userCanAttack) {
+      }, 2000);
+
+    // number 4 button is 52
+    } else if (key === 52 && userCanAttack) {
       if ((Math.random()*50) <= userCritChanceFour) {
         var damage = userCritFour;
         if (computerPokemon.health - damage > 0) {
@@ -241,7 +254,7 @@ $(document).ready(function () {
       userCanAttack = false;
       setTimeout(function() {
         userCanAttack = true;
-      }, 3000);
+      }, 2000);
     }
   });
 
@@ -290,14 +303,6 @@ $(document).ready(function () {
     var beerAttackFour = $("<p>").addClass('').attr("id", 'attackFour').html(this.info.beerAttackFour).appendTo(beerNames);
   }
 
-  // $(function() {
-  //   var localValue = localStorage.getItem('pokemonName');
-  //   console.log(localValue);
-  //   if(localValue !== 'null');
-  //     console.log('Ready!');
-  //     // create a progress bar full and say ready
-  // });
-
   $pkmnSearch.keyup(function() {
     var pokemon = $pkmnSearch.val();
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -317,11 +322,6 @@ $(document).ready(function () {
       return false;
     });
   });
-
-  // $logout.on('click', function(error) {
-  //   alert('Are you sure? This will wipe your session.');
-  //
-  // });
 
   $(function(){
     $newBtn.click(function(){
@@ -352,9 +352,7 @@ $(document).ready(function () {
     // window.location.href = '/brewery/get?brewery=' + encodeURIComponent(brewery);
   });
 
-  setTimeout(function() {
-    $('.countdown').fadeOut('slow');
-  }, 2500);
+
 
   $displayCurrentBtn.on('click', function() {
     var pokeList = $('.pokemonLoadout');
@@ -363,9 +361,9 @@ $(document).ready(function () {
     $('<li>').html('Tolerance Points (TP)' + ': ' + userPokemonTP).appendTo(pokeList);
     $('<li>').html('Pokemon Type' + ': ' + userPokemonType ).appendTo(pokeList);
     $('<li>').html('Attack 1' + ': ' + userAttackOne ).appendTo(attackList);
-    $('<li>').html('Attack 1' + ': ' + userAttackTwo ).appendTo(attackList);
-    $('<li>').html('Attack 1' + ': ' + userAttackThree ).appendTo(attackList);
-    $('<li>').html('Attack 1' + ': ' + userAttackFour ).appendTo(attackList);
+    $('<li>').html('Attack 2' + ': ' + userAttackTwo ).appendTo(attackList);
+    $('<li>').html('Attack 3' + ': ' + userAttackThree ).appendTo(attackList);
+    $('<li>').html('Attack 4' + ': ' + userAttackFour ).appendTo(attackList);
   });
 
   $( function() {
@@ -574,3 +572,43 @@ $(document).ready(function () {
 //     });
 //   }, 5000);
 // })();
+
+
+
+
+
+// if (computerCanAttack && userPokemonTP >= 1) {
+//   userPokemonTP -= compDamage;
+//   console.log('user tp: ', userPokemonTP);
+// }
+// computerCanAttack = false;
+// setTimeout(function() {
+//   userCanAttack = true;
+//   console.log('user tp: ', userPokemonTP);
+// }, 2000);
+
+
+  // function computerAttacks() {
+  //   var compDamage = computerPokemon.attack;
+  //   setInterval(function() {
+  //     if (userPokemonTP >= 1 && computerCanAttack === true) {
+  //     userPokemonTP -= compDamage;
+  //     console.log('user tp: ', userPokemonTP);
+  //     computerCanAttack = false;
+  //     }
+  //   }, 2000);
+  // }
+
+  // var $startBattle = $('.start-fight-btn');
+  //
+  // $startBattle.on('click', function() {
+  //   if (computerCanAttack && userPokemonTP >= 1) {
+  //     userPokemonTP -= compDamage;
+  //     console.log('user tp: ', userPokemonTP);
+  //   }
+  //   computerCanAttack = false;
+  //   setTimeout(function() {
+  //     userCanAttack = true;
+  //     console.log('user tp: ', userPokemonTP);
+  //   }, 2000);
+  // });
