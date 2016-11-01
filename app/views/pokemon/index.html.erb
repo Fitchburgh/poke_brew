@@ -3,30 +3,39 @@
     <%= button_to "Log Out", destroy_trainer_session_path, method: :delete, :class => 'btn sharp logout pull-right', role: 'presentation'%>
     <ol class="breadcrumb sharp col-sm-10">
       <li class="homeBtn"><a href="/game/index">Home</a></li>
-      <li><a href="/pokemon/index" class="active">Pokemon</a></li>
+      <li><a href="/pokemon/index" class="active newBtn">Pokemon</a></li>
       <li>Brewery</li>
       <li class="">Ready Up</li>
       <li class="">Battle</li>
     </ol>
   </div>
   <div class="row">
-    <div class="progress">Readiness
-      <div class="progress-bar sharp progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
+    <div class="progress">Readiness!
+      <div class="progress-bar sharp progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
       </div>
     </div>
   </div>
 </div>
 
 <div class="container main-body">
+  <h1 class="tagline text-center"> Gotta Chug 'em All!</h1>
   <div class="row">
     <input type="text" class="form-control sharp search-bar col-sm-3" autocomplete="off" id="pkmnSearch" placeholder="Enter a Pokemon..."></input>
-    <button type="submit" class="btn sharp btn-default pkmn-search-btn col-md-1">Submit</button>
+    <button type="submit" class="btn sharp btn-default pkmn-search-btn col-md-1">Search</button>
   </div>
   <br />
-
-
-
-
+  <div class="pokeLoadout">
+    <div class="panel panel-default poke-panel">
+      <div class="panel-heading poke-panel-heading">
+        <h3 class="panel-title poke-panel-title"></h3>
+      </div>
+      <div class="panel-body">
+        <ul class="poke-ul">
+        </ul>
+      </div>
+    </div>
+    <a href="/brewery/index"><button type="submit" class="btn sharp btn-default poke-continue-btn col-md-1">Continue</button></a>
+  </div>
 </div>
 <br />
 <!-- <div class="container">

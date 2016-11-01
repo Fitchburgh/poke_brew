@@ -41,7 +41,7 @@ $(document).ready(function () {
         } else {
           pokemon = JSON.parse(pokemonResult);
           PokemonDetails(pokemon);
-          window.location.href = '/brewery/index';
+          // window.location.href = '/brewery/index';
         }
       },
       'error': function(error) {
@@ -67,9 +67,8 @@ $(document).ready(function () {
     localStorage.setItem('pokemonAttacks', pokeSelect.attacks);
 
     var pokemonSelection = $("<div>").attr('class', this.info.pokemonName);
-    var pokemonName = $("<p>").addClass('selectedPokemon').attr("id", this.info.pokemonName).html(this.info.pokemonName).appendTo(pokemonSelection);
-
-    $(pokemonSelection).insertAfter(".main-body");
+    var pokemonName = $("<p>").addClass('selectedPokemon').attr("id", this.info.pokemonName).html(this.info.pokemonName).appendTo('.poke-panel-title');
+    var
   }
 
   // setTimeout(function(pokemon) {
@@ -344,7 +343,9 @@ $(document).ready(function () {
     // window.location.href = '/brewery/get?brewery=' + encodeURIComponent(brewery);
   });
 
-
+  setTimeout(function() {
+    $('.countdown').fadeOut('slow');
+  }, 2500);
 
 
 

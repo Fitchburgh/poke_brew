@@ -3,9 +3,9 @@
     <%= button_to "Log Out", destroy_trainer_session_path, method: :delete, :class => 'btn sharp logout pull-right', role: 'presentation'%>
     <ol class="breadcrumb sharp col-sm-10">
       <li class="homeBtn"><a href="/game/index">Home</a></li>
-      <li><a href="/pokemon/index" class="">Pokemon</a></li>
-      <li><a href="/brewery/index" class="">Brewery</a></li>
-      <li><a href="#" class="">Ready Up</a></li>
+      <li>Pokemon</li>
+      <li>Brewery</li>
+      <li>Ready Up</a></li>
       <li class="active">Battle</li>
     </ol>
   </div>
@@ -15,5 +15,7 @@
         <span class="sr-only">100% Complete</span>
       </div>
     </div>
+    <h1 class="text-center pulsate"> Battle! </h1>
+    <h1 class="countdown text-center"></h1>
   </div>
 </div>

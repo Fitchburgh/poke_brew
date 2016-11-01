@@ -3,7 +3,7 @@
     <%= button_to "Log Out", destroy_trainer_session_path, method: :delete, :class => 'btn sharp logout pull-right', role: 'presentation'%>
     <ol class="breadcrumb sharp col-sm-10">
       <li class="homeBtn"><a href="/game/index">Home</a></li>
-      <li><a href="/pokemon/index" class="active">Pokemon</a></li>
+      <li><a href="/pokemon/index" class="newBtn active">Pokemon</a></li>
       <li><a href="/brewery/index" class="active">Brewery</a></li>
       <li><a href="#" class="active">Ready Up</a></li>
       <li class="">Battle</li>
@@ -25,7 +25,7 @@
 <div class="container">
   <div class="row">
     <div class="">
-      <button type="submit" class="btn sharp btn-warning battle-btn col-md-1"><a href="/game/battle"><h2>Battle!</h2></button></a>
+      <a href="/pokemon/index" type="submit" class="btn sharp battle-btn col-md-1"><h2 class="battle-head">Battle!</h2></a>
     </div>
   </div>
 </div>

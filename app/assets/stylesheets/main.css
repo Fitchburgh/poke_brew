@@ -1,3 +1,7 @@
+body {
+  font-family: 'Khula', sans-serif;
+}
+
 .pokemon-list {
   min-width: 25%;
   max-width: 25%;
@@ -7,22 +11,80 @@
   max-width: 50%
 }
 
+.beer-continue-btn, .poke-continue-btn {
+  background-color: rgba(53, 199, 136, 0.5);
+}
+
+
 .pkmn-search-btn, .brewery-search-btn {
-  background-color: rgba(53, 199, 136, 1);
+  background-color: rgba(0, 64, 144, .5);
+}
+
+.battle-head {
+  color: black;
 }
 
 .battle-btn {
   padding: 35px 50px;
   width: 100%;
+  background-color: rgba(164, 28, 40, 1);
 }
 
-.ready-screen-btn {
+.ready-screen-btn, .pokemon-selection-btn {
   width: 100%;
 }
 
 
+.text-center {
+  text-align: center;
+}
 
 
+.countdown:before {
+    content: '321';
+
+    font-family:monospace;
+    display:inline-block;
+    width:1ch;
+    overflow:hidden;
+
+    animation:countdowns 3s steps(3) 1;
+}
+
+@keyframes countdowns {
+    0% {text-indent:0}
+    100% {text-indent:-3ch;}
+}
+
+.pulsate {
+  font-size: 51px;
+    /*-webkit-animation: pulsate 3s ease-out;*/
+    -webkit-animation: pulsate 2.9s linear;
+    -webkit-animation-iteration-count: 1;
+    opacity: 1;
+}
+@-webkit-keyframes pulsate {
+    0% {
+        font-size: 10px;
+        opacity: 0.10;
+    }
+    /*25% {
+        font-size: 10px;
+        opacity: 0.25;
+    }*/
+    50% {
+        font-size: 30px;
+        opacity: 0.5;
+    }
+    /*75% {
+        font-size: 40px;
+        opacity: 0.75;
+    }*/
+    100% {
+        font-size: 50px;
+        opacity: 1.0;
+    }
+}
 
 
 
