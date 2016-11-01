@@ -148,6 +148,8 @@ $(document).ready(function () {
     //   }, 2000);
     var $damageSlider = $('.damageSlider');
     var $enemyHealth = $('.enemyHealth');
+    $('<li>').attr("id", 'mom').html(computerPokemon.health).appendTo($enemyHealth);
+    $('#mom').fadeOut(200);
     var key = event.keyCode;
     // number 1 button is 49
     if (key === 49 && userCanAttack) {
@@ -155,9 +157,7 @@ $(document).ready(function () {
         var damage = userCritOne;
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          $('<li>').attr("id", userPokemon).html(computerPokemon.health).appendTo($enemyHealth);
 // I'm trying to get damage on the screen by appending list items.
-          // $('#userPokemon').slideUp(1500);
           console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
