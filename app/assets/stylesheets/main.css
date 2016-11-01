@@ -7,11 +7,19 @@ body {
   max-width: 25%;
 }
 
-#pkmnSearch {
-  max-width: 50%
+#pkmnSearch, #brewerySearch {
+
 }
 
-.beer-continue-btn, .poke-continue-btn {
+.display-current-btn {
+
+}
+
+.search-bars {
+  text-align: center;
+}
+
+.continue-btn {
   background-color: rgba(53, 199, 136, 0.5);
 }
 

@@ -15,6 +15,8 @@ $(document).ready(function () {
     ajaxStop: function() { $body.removeClass("loading"); }
   });
 
+  var $displayCurrentBtn = $('.display-current-btn');
+
   var $newBtn = $('.newBtn');
 
   var $logout = $('.logout');
@@ -24,6 +26,34 @@ $(document).ready(function () {
 
   var $brewerySearch = $('#brewerySearch');
   var $brewerySearchBtn = $('.brewery-search-btn');
+
+
+  var userPokemon = localStorage.getItem('pokemonName');
+  var userPokemonType = localStorage.getItem('pokemonType');
+  var userPokemonTP = localStorage.getItem('pokemonWeight');
+
+  var userAttackOne = localStorage.getItem('beerAttackOne');
+  var userAttackTwo = localStorage.getItem('beerAttackTwo');
+  var userAttackThree = localStorage.getItem('beerAttackThree');
+  var userAttackFour = localStorage.getItem('beerAttackFour');
+
+  var userDamageOne  = localStorage.getItem('baseDamageOne');
+  var userDamageTwo  = localStorage.getItem('baseDamageTwo');
+  var userDamageThree  = localStorage.getItem('baseDamageThree');
+  var userDamageFour  = localStorage.getItem('baseDamageFour');
+
+  var userCritOne = localStorage.getItem('critDamageOne');
+  var userCritTwo = localStorage.getItem('critDamageTwo');
+  var userCritThree = localStorage.getItem('critDamageThree');
+  var userCritFour = localStorage.getItem('critDamageFour');
+
+  var userCritChanceOne = localStorage.getItem('critChanceOne');
+  var userCritChanceTwo = localStorage.getItem('critChanceTwo');
+  var userCritChanceThree = localStorage.getItem('critChanceThree');
+  var userCritChanceFour = localStorage.getItem('critChanceFour');
+
+  var computerPokemon = {'pokemon': 'togepi', 'health': 200, 'attack': 25};
+
 
   function getPokemonInfo(pokemon) {
     $pkmnSearchBtn.attr('disabled', true);
@@ -41,6 +71,7 @@ $(document).ready(function () {
         } else {
           pokemon = JSON.parse(pokemonResult);
           PokemonDetails(pokemon);
+          $pkmnSearchBtn.attr('disabled', false);
           // window.location.href = '/brewery/index';
         }
       },
@@ -66,9 +97,10 @@ $(document).ready(function () {
     localStorage.setItem('pokemonType', pokeSelect.type.type.name);
     localStorage.setItem('pokemonAttacks', pokeSelect.attacks);
 
-    var pokemonSelection = $("<div>").attr('class', this.info.pokemonName);
-    var pokemonName = $("<p>").addClass('selectedPokemon').attr("id", this.info.pokemonName).html(this.info.pokemonName).appendTo('.poke-panel-title');
-    var
+    var pokemonName = $("<h3>").addClass('selectedPokemon').attr("id", this.info.pokemonName).html(this.info.pokemonName).appendTo('.poke-panel-title');
+    var pokeList = $('.poke-ul');
+    var pokeTP = $('<li>').html('Tolerance Points (TP)' + ': ' + this.info.pokemonTP).appendTo(pokeList);
+    var pokemonType = $('<li>').html('Pokemon Type' + ': ' + this.info.pokemonType).appendTo(pokeList);
   }
 
   // setTimeout(function(pokemon) {
@@ -92,7 +124,8 @@ $(document).ready(function () {
         } else {
           brewery = JSON.parse(breweryResult);
           BeerDetails(brewery);
-          window.location.href = '/game/loadout';
+          $brewerySearchBtn.attr('disabled', false);
+          // window.location.href = '/game/loadout';
         }
       },
       'error': function(error) {
@@ -105,30 +138,7 @@ $(document).ready(function () {
   // setInterval will be used for the AI
   var userCanAttack = true;
 
-  var userPokemon = localStorage.getItem('pokemonName');
-  var userPokemonTP = localStorage.getItem('pokemonWeight');
 
-  var userAttackOne = localStorage.getItem('beerAttackOne');
-  var userAttackTwo = localStorage.getItem('beerAttackTwo');
-  var userAttackThree = localStorage.getItem('beerAttackThree');
-  var userAttackFour = localStorage.getItem('beerAttackFour');
-
-  var userDamageOne  = localStorage.getItem('baseDamageOne');
-  var userDamageTwo  = localStorage.getItem('baseDamageTwo');
-  var userDamageThree  = localStorage.getItem('baseDamageThree');
-  var userDamageFour  = localStorage.getItem('baseDamageFour');
-
-  var userCritOne = localStorage.getItem('critDamageOne');
-  var userCritTwo = localStorage.getItem('critDamageTwo');
-  var userCritThree = localStorage.getItem('critDamageThree');
-  var userCritFour = localStorage.getItem('critDamageFour');
-
-  var userCritChanceOne = localStorage.getItem('critChanceOne');
-  var userCritChanceTwo = localStorage.getItem('critChanceTwo');
-  var userCritChanceThree = localStorage.getItem('critChanceThree');
-  var userCritChanceFour = localStorage.getItem('critChanceFour');
-
-  var computerPokemon = {'Pokemon': 'togepi', 'health': 200, 'attack': 25};
 // after each attack reset value to localstorage reassign the new value of pokemon weight
 //target the html elemtn that contains the weight and change its value to the math here.
 // beer1 ibumin subtracted from health
@@ -278,7 +288,6 @@ $(document).ready(function () {
     var beerAttackTwo = $("<p>").addClass('').attr("id", 'attackTwo').html(this.info.beerAttackTwo).appendTo(beerNames);
     var beerAttackThree = $("<p>").addClass('').attr("id", 'attackThree').html(this.info.beerAttackThree).appendTo(beerNames);
     var beerAttackFour = $("<p>").addClass('').attr("id", 'attackFour').html(this.info.beerAttackFour).appendTo(beerNames);
-    var storagePokemonName = $("<p>").addClass('').attr('id', 'pokemonName').text(localStorage.getItem('pokemonName')).appendTo(beerNames);
   }
 
   // $(function() {
@@ -347,7 +356,17 @@ $(document).ready(function () {
     $('.countdown').fadeOut('slow');
   }, 2500);
 
-
+  $displayCurrentBtn.on('click', function() {
+    var pokeList = $('.pokemonLoadout');
+    var attackList = $('.attacks-ul');
+    $("<h3>").addClass('selectedPokemon').html(userPokemon).appendTo('.poke-panel-title');
+    $('<li>').html('Tolerance Points (TP)' + ': ' + userPokemonTP).appendTo(pokeList);
+    $('<li>').html('Pokemon Type' + ': ' + userPokemonType ).appendTo(pokeList);
+    $('<li>').html('Attack 1' + ': ' + userAttackOne ).appendTo(attackList);
+    $('<li>').html('Attack 1' + ': ' + userAttackTwo ).appendTo(attackList);
+    $('<li>').html('Attack 1' + ': ' + userAttackThree ).appendTo(attackList);
+    $('<li>').html('Attack 1' + ': ' + userAttackFour ).appendTo(attackList);
+  });
 
   $( function() {
       var availableTags = [
