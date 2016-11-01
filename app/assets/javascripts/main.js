@@ -135,6 +135,9 @@ $(document).ready(function () {
     $('.countdown').fadeOut('slow');
   }, 2500);
 
+  $('.userHealth').append(userPokemon + "'s health:");
+  $('.enemyHealth').append(computerPokemon.pokemon + "s health:");
+
   $(document).on('keyup', function(event) {
     // setInterval(function() {
     //   if (computerCanAttack && userPokemonTP >= 1) {
@@ -146,28 +149,35 @@ $(document).ready(function () {
     //   computerCanAttack = false;
     //   console.log('user tp: ', userPokemonTP);
     //   }, 2000);
-    var $damageSlider = $('.damageSlider');
+    var $userHealth = $('.userHealth');
     var $enemyHealth = $('.enemyHealth');
-    $('<li>').attr("id", 'mom').html(computerPokemon.health).appendTo($enemyHealth);
-    $('#mom').fadeOut(200);
+    var enemyHealth = $('<li>').attr("id", 'enemyHP').html(computerPokemon.health).appendTo($enemyHealth);
+    var userHealth = $('<li>').attr("id", 'userHP').html(userPokemonTP).appendTo($userHealth);
+
+    userHealth.fadeOut(1500);
+    enemyHealth.fadeOut(1500);
+
     var key = event.keyCode;
     // number 1 button is 49
     if (key === 49 && userCanAttack) {
+
       if ((Math.random()*50) <= userCritChanceOne) {
+
         var damage = userCritOne;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-// I'm trying to get damage on the screen by appending list items.
-          console.log(computerPokemon.health);
+
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
         }
       } else {
+
         var damage = userDamageOne;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
@@ -180,20 +190,23 @@ $(document).ready(function () {
 
     // number 2 button is 50
     } else if (key === 50 && userCanAttack) {
+
       if ((Math.random()*50) <= userCritChanceTwo) {
+
         var damage = userCritTwo;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
         }
       } else ;{
+
         var damage = userDamageTwo;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
@@ -206,20 +219,23 @@ $(document).ready(function () {
 
     // number 3 button is 51
     } else if (key === 51 && userCanAttack) {
+
       if ((Math.random()*50) <= userCritChanceThree) {
+
         var damage = userCritThree;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
         }
       } else ;{
+
         var damage = userDamageThree;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
@@ -232,20 +248,23 @@ $(document).ready(function () {
 
     // number 4 button is 52
     } else if (key === 52 && userCanAttack) {
+
       if ((Math.random()*50) <= userCritChanceFour) {
+
         var damage = userCritFour;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
         }
       } else ;{
+
         var damage = userDamageFour;
+
         if (computerPokemon.health - damage > 0) {
           computerPokemon.health -= damage;
-          console.log(computerPokemon.health);
         } else {
           computerPokemon.heath = 0;
           alert('You win!');
@@ -351,8 +370,6 @@ $(document).ready(function () {
     return false;
     // window.location.href = '/brewery/get?brewery=' + encodeURIComponent(brewery);
   });
-
-
 
   $displayCurrentBtn.on('click', function() {
     var pokeList = $('.pokemonLoadout');
