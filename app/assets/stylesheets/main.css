@@ -160,5 +160,29 @@ body.loading .modal {
   position: absolute;
   left: 50%;
   top: 80%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.mew {
+  background-image: url('mew.png');
+  background-repeat: no-repeat;
+  top: 37vh;
+  position: absolute;
+  right: 25%;
+  height: 50px;
+  width: 50px;
+  z-index: 1;
+}
+
+.nidoqueen {
+  background-image: url('nidoqueen.png');
+  background-repeat: no-repeat;
+  top: 30vh;
+  position: absolute;
+  left: 25%;
+  height: 50px;
+  width: 50px;
+  z-index: 1;
+
 }
