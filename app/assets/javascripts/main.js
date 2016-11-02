@@ -45,7 +45,7 @@ $(document).ready(function () {
   var computerPokemon = {'pokemon': 'mew', 'health': 200, 'attack': 25};
 
   function getPokemonInfo(pokemon) {
-    
+
     $pkmnSearchBtn.attr('disabled', true);
     $.ajax({
       'url': '/pokemon/get?pokemon=' + encodeURIComponent(pokemon), //'/brewery/index',
@@ -62,7 +62,6 @@ $(document).ready(function () {
           pokemon = JSON.parse(pokemonResult);
           PokemonDetails(pokemon);
           $pkmnSearchBtn.attr('disabled', false);
-          // window.location.href = '/brewery/index';
         }
       },
       'error': function(error) {
@@ -89,11 +88,6 @@ $(document).ready(function () {
     var pokeTP = $('<li>').html('Tolerance Points (TP)' + ': ' + this.info.pokemonTP).appendTo(pokeList);
     var pokemonType = $('<li>').html('Pokemon Type' + ': ' + this.info.pokemonType).appendTo(pokeList);
   }
-
-  // setTimeout(function(pokemon) {
-  //   location.reload();
-  //   getPokemonInfo(pokemon);
-  // }, 3000),
 
   function getBeerAttacks(brewery) {
     $brewerySearchBtn.attr('disabled', true);
@@ -125,6 +119,12 @@ $(document).ready(function () {
   // setInterval will be used for the AI
   var userCanAttack = true;
   var computerCanAttack = true;
+  var userCanDodgeUp = true;
+  var userCanDodgeDown = true;
+  var userCanDodgeRight = true;
+  var userCanDodgeLeft = true;
+  // set a timeout like 500 on the computer attack attack to be 0 if userDodged === true, set this in the dodge function with a cooldown on all of them for 10 seconds or whatever. give a timer on dodge.
+
 
   setTimeout(function() {
     $('.countdown').fadeOut('slow');
@@ -146,9 +146,7 @@ $(document).ready(function () {
       if (userPokemonTP >= 1) {
         $('.mew').effect("shake");
         userPokemonTP -= compDamage;
-      } else if (userPokemonTP <= 0) {
-        // alert('I remember my first beer...');
-        clearInterval(loopHandle);
+        console.log(compDamage, 'in comp loop');
       }
     }, 2000);
 
@@ -158,7 +156,7 @@ $(document).ready(function () {
       var enemyHealth = $('<li>').attr("id", 'enemyHP').html(computerPokemon.health).appendTo($enemyHealth);
       var userHealth = $('<li>').attr("id", 'userHP').html(userPokemonTP).appendTo($userHealth);
 
-      userHealth.fadeOut(1500);
+      // userHealth.fadeOut(1500);
       enemyHealth.fadeOut(1500);
 
       var key = event.keyCode;
@@ -166,7 +164,25 @@ $(document).ready(function () {
       if (computerPokemon.health <= 0) {
         alert('You win!');
         clearInterval(loopHandle);
+      } else if (userPokemonTP <= 0) {
+        alert('I remember my first beer...');
+        clearInterval(loopHandle);
       }
+
+      //dodge
+      // idea here is that usercandodgeup is false until they hit down, left if right, etc.
+      //38 is up arrow
+      if (key === 38 && userCanDodgeUp) {
+        compDamage = 0;
+        setTimeout(function() {
+          console.log(compDamage, 'in dodge stuff 1');
+          userCanDodgeUp = false;
+          compDamage = computerPokemon.attack;
+          console.log(compDamage, 'in dodge stuff 2');
+        }, 250);
+      }
+
+      // battle
       if (key === 49 && userCanAttack) {
 
         if ((Math.random()*50) <= userCritChanceOne) {
@@ -176,10 +192,6 @@ $(document).ready(function () {
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
             $userMonPic.effect("shake");
-          // } else {
-          //   computerPokemon.heath <= 0;
-          //   alert('You win!');
-          //   clearInterval(loopHandle);
           }
         } else {
 
@@ -301,6 +313,10 @@ $(document).ready(function () {
     });
   });
 
+  $('.logout').on('click', function() {
+    window.location.href = '/trainers/sign_in';
+  });
+
   $('.homeBtn').on('click', function() {
     window.location.href = '/game/index';
   });
@@ -374,25 +390,38 @@ $(document).ready(function () {
     var beerAttackFour = $("<p>").addClass('').attr("id", 'attackFour').html(this.info.beerAttackFour).appendTo(beerNames);
   }
 
-  $pkmnSearch.keyup(function() {
+
+
+  $pkmnSearchBtn.on('click', function() {
+    // $pkmnSearchBtn.attr('disabled', true);
     var pokemon = $pkmnSearch.val();
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    // window.location.href = '/pokemon/get?pokemon=' + encodeURIComponent(pokemon);
+    // maybe add a delay here or some ajax polling - whatever that is.
 
-    $('.pokemon').show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-    $pkmnSearchBtn.on('click', function() {
-      // $pkmnSearchBtn.attr('disabled', true);
-      var pokemon = $pkmnSearch.val();
-      // window.location.href = '/pokemon/get?pokemon=' + encodeURIComponent(pokemon);
-      // maybe add a delay here or some ajax polling - whatever that is.
+    getPokemonInfo(pokemon);
 
-      getPokemonInfo(pokemon);
-
-      return false;
-    });
+    return false;
   });
+
+  // $pkmnSearch.keyup(function() {
+  //   var pokemon = $pkmnSearch.val();
+  //   var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+  //
+  //   $('.pokemon').show().filter(function() {
+  //       var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+  //       return !~text.indexOf(val);
+  //   }).hide();
+  //   $pkmnSearchBtn.on('click', function() {
+  //     // $pkmnSearchBtn.attr('disabled', true);
+  //     var pokemon = $pkmnSearch.val();
+  //     // window.location.href = '/pokemon/get?pokemon=' + encodeURIComponent(pokemon);
+  //     // maybe add a delay here or some ajax polling - whatever that is.
+  //
+  //     getPokemonInfo(pokemon);
+  //
+  //     return false;
+  //   });
+  // });
 
   $(function(){
     $newBtn.click(function(){

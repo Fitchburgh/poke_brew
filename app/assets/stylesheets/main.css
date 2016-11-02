@@ -184,6 +184,7 @@ body.loading .modal {
 .userMonPic {
   background: url();
   background-repeat: no-repeat;
+
   top: 30vh;
   position: absolute;
   left: 22%;
