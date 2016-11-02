@@ -10,7 +10,13 @@
   </head>
 
   <body>
+    <% if current_page? '/game/battle' %>
+      <div class="battle-page">
+      </div>
+    <% end %>
+
     <%= yield %>
+
 
   <div class="modal"></div>
   </body>

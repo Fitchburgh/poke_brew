@@ -18,7 +18,6 @@ $(document).ready(function () {
   var $brewerySearch = $('#brewerySearch');
   var $brewerySearchBtn = $('.brewery-search-btn');
 
-
   var userPokemon = localStorage.getItem('pokemonName');
   var userPokemonType = localStorage.getItem('pokemonType');
   var userPokemonTP = localStorage.getItem('pokemonWeight');
@@ -45,8 +44,8 @@ $(document).ready(function () {
 
   var computerPokemon = {'pokemon': 'mew', 'health': 200, 'attack': 25};
 
-
   function getPokemonInfo(pokemon) {
+    
     $pkmnSearchBtn.attr('disabled', true);
     $.ajax({
       'url': '/pokemon/get?pokemon=' + encodeURIComponent(pokemon), //'/brewery/index',
@@ -79,9 +78,6 @@ $(document).ready(function () {
         pokemonTP: pokeSelect.weight, // TP is tolerance points
         pokemonType: pokeSelect.type.type.name,
         pokemonAttacks: pokeSelect.attacks,
-        // pokemonAttackTwo: asdf, //this needs to be the beer
-        // pokemonAttackThree: asdf,
-        // pokemonAttackFour: asdf
     };
     localStorage.setItem('pokemonName', pokeSelect.name);
     localStorage.setItem('pokemonWeight', pokeSelect.weight);
@@ -130,7 +126,6 @@ $(document).ready(function () {
   var userCanAttack = true;
   var computerCanAttack = true;
 
-
   setTimeout(function() {
     $('.countdown').fadeOut('slow');
   }, 2500);
@@ -138,20 +133,14 @@ $(document).ready(function () {
   $('.userHealth').append(userPokemon + "'s health:");
   $('.enemyHealth').append(computerPokemon.pokemon + "s health:");
 
-  //
-  // setInterval(function() {
-  //   if (computerCanAttack && userPokemonTP >= 1) {
-  //     userPokemonTP -= compDamage;
-  //     console.log('user tp: ', userPokemonTP);
-  //   } else if (userPokemonTP <= 0) {
-  //     alert('I remember my first beer...');
-  //   }
-  //   computerCanAttack = false;
-  //   console.log('user tp: ', userPokemonTP);
-  // }, 2000);
-
   $('.battle-page').ready(function() {
+    var $userMonPic = $('.userMonPic');
+    var $pokemon = localStorage.getItem('pokemonName');
+    $userMonPic.css({'background': 'url(/assets/' + $pokemon + '.png)'}).attr('id', $pokemon); // sprite from /app/assets/images/pokesprites/...png
+// sprite from /app/assets/images/pokesprites/...png
+
     console.log('in fight...');
+
     var compDamage = computerPokemon.attack;
     var loopHandle = setInterval(function() {
       if (userPokemonTP >= 1) {
@@ -160,7 +149,7 @@ $(document).ready(function () {
       } else if (userPokemonTP <= 0) {
         // alert('I remember my first beer...');
         clearInterval(loopHandle);
-      } console.log(userPokemonTP);
+      }
     }, 2000);
 
     $('.battle-page').on('keyup', function(event) {
@@ -174,6 +163,10 @@ $(document).ready(function () {
 
       var key = event.keyCode;
       // number 1 button is 49
+      if (computerPokemon.health <= 0) {
+        alert('You win!');
+        clearInterval(loopHandle);
+      }
       if (key === 49 && userCanAttack) {
 
         if ((Math.random()*50) <= userCritChanceOne) {
@@ -182,11 +175,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         } else {
 
@@ -194,11 +187,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         }
         userCanAttack = false;
@@ -215,11 +208,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         } else ;{
 
@@ -227,11 +220,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         }
         userCanAttack = false;
@@ -248,11 +241,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         } else ;{
 
@@ -260,11 +253,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         }
         userCanAttack = false;
@@ -281,11 +274,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         } else ;{
 
@@ -293,11 +286,11 @@ $(document).ready(function () {
 
           if (computerPokemon.health - damage > 0) {
             computerPokemon.health -= damage;
-            $('.nidoqueen').effect("shake");
-          } else {
-            computerPokemon.heath = 0;
-            alert('You win!');
-            clearInterval(loopHandle);
+            $userMonPic.effect("shake");
+          // } else {
+          //   computerPokemon.heath <= 0;
+          //   alert('You win!');
+          //   clearInterval(loopHandle);
           }
         }
         userCanAttack = false;
@@ -313,6 +306,10 @@ $(document).ready(function () {
   });
 
   $('.pkmnBtn').on('click', function() {
+    window.location.href = '/pokemon/index';
+  });
+
+  $('.pokemon-selection-btn').on('click', function() {
     window.location.href = '/pokemon/index';
   });
 
@@ -505,7 +502,7 @@ $(document).ready(function () {
         'electrode',
         'exeggcute',
         'exeggutor',
-        "farfetch'd",
+        "farfetchd",
         'fearow',
         'flareon',
         'gastly',
