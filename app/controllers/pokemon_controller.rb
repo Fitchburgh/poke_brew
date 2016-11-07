@@ -14,6 +14,3 @@ class PokemonController < ApplicationController
     end
   end
 end
-
-# <% pkmn_object = Pokemon.new('name' => 'articuno', 'list' => @poke_list)#, 'id_names' => pkmn_name_and_id) %>
-# <% pkmn_object.write_to(pkmn_object) %>

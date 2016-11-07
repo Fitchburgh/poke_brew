@@ -1,4 +1,4 @@
- #
+#
 class GameController < ApplicationController
   def index
     redirect_to '/trainers/sign_in' if current_trainer.nil?
