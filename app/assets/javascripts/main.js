@@ -125,6 +125,10 @@ $(document).ready(function () {
   var userCanDodgeLeft = true;
   // set a timeout like 500 on the computer attack attack to be 0 if userDodged === true, set this in the dodge function with a cooldown on all of them for 10 seconds or whatever. give a timer on dodge.
 
+  function compAttackReset(){
+    compDamage = computerPokemon.attack;
+  }
+
 
   setTimeout(function() {
     $('.countdown').fadeOut('slow');
@@ -156,7 +160,7 @@ $(document).ready(function () {
       var enemyHealth = $('<li>').attr("id", 'enemyHP').html(computerPokemon.health).appendTo($enemyHealth);
       var userHealth = $('<li>').attr("id", 'userHP').html(userPokemonTP).appendTo($userHealth);
 
-      // userHealth.fadeOut(1500);
+      userHealth.fadeOut(1500);
       enemyHealth.fadeOut(1500);
 
       var key = event.keyCode;
@@ -174,12 +178,10 @@ $(document).ready(function () {
       //38 is up arrow
       if (key === 38 && userCanDodgeUp) {
         compDamage = 0;
-        setTimeout(function() {
-          console.log(compDamage, 'in dodge stuff 1');
-          userCanDodgeUp = false;
-          compDamage = computerPokemon.attack;
-          console.log(compDamage, 'in dodge stuff 2');
-        }, 250);
+        userCanDodgeUp = false;
+        console.log(compDamage);
+        setTimeout(compDamage = computerPokemon.attack, 500);
+        console.log(compDamage);
       }
 
       // battle
@@ -329,6 +331,14 @@ $(document).ready(function () {
     window.location.href = '/pokemon/index';
   });
 
+  // $('.pokemon-selection-btn').mouseover(function(){
+  //   //moving the div left a bit is completely optional
+  //   //but should have the effect of growing the image from the middle.
+  //   $(this).stop().animate({"height": "240px","bottom":"-25px"}, 200,'easeInQuint');
+  // }).mouseout(function(){
+  //   $(this).stop().animate({"height": "230px","bottom":"0px"}, 200,'easeInQuint');
+  // });
+
   $('.brewBtn').on('click', function() {
     window.location.href = '/game/index';
   });
@@ -344,6 +354,18 @@ $(document).ready(function () {
   $('.poke-continue-btn').on('click', function() {
     window.location.href = '/brewery/index';
   });
+
+  $('.ready-screen-btn').on('click', function() {
+    window.location.href = '/game/loadout';
+  });
+
+  // $('.ready-screen-btn').mouseover(function(){
+  //   //moving the div left a bit is completely optional
+  //   //but should have the effect of growing the image from the middle.
+  //   $(this).stop().toggle({"scale": "110%"}, 200,'easeInQuint');
+  // });//.mouseout(function(){
+  //   //$(this).stop().animate({"scale": "100%"}, 200,'easeInQuint');
+  // //});
 
   // beer constructor
   function BeerDetails(beerSelect) {

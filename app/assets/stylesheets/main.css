@@ -39,15 +39,11 @@ body {
 }
 
 .pokemon-selection-btn {
-  width: 50%;
-  background-color: white;
-  color: black;
+  font-size: 24px;
 }
 
 .ready-screen-btn {
-  background-color: red;
-  color: black;
-  width: 50%;
+  font-size: 26px;
 }
 
 
@@ -147,16 +143,62 @@ body {
               no-repeat;
 }
 
-/* When the body has the loading class, we turn
-   the scrollbar off with overflow:hidden */
 body.loading {
   overflow: hidden;
 }
 
-/* Anytime the body has the loading class, our
-   modal element will be visible */
 body.loading .modal {
   display: block;
+}
+
+.top{
+  background-color:#EB2224;
+  height:110px;
+  width:230px;
+  border-radius:195px 195px 0 0;
+  border-bottom:6px solid #000000;
+}
+
+.middle_circle{
+  background-color:#FFFFFF;
+  width:75px;
+  height:75px;
+  transform: translate(80px, 0);
+  border-radius:50%;
+  margin: 70px 65px;
+  position:absolute;
+  border:12px solid #000000;
+}
+
+/*.white_in{
+  background-color:#FFFFFF;
+  border-top: 50%;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  padding:4px 4px;
+  margin:5px 6px;
+  border:3px solid #000000;
+}*/
+
+.bottom {
+  /*transform: scale(1.1);*/
+
+  background-color:#FFFFFF;
+  height:110px;
+  width:230px;
+  border-radius:0 0 195px 195px;
+  border-top:6px solid #000000;
+  /*transform: rotate(25deg);*/
+}
+
+.pokeball{
+  margin:50px auto;
+  animation: spin 1.8s infinite linear;
+}
+
+.poke-div {
+  margin: 0 auto; padding: 0;
 }
 
 .pic {
