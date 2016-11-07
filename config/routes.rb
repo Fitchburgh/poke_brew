@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :trainers
   # root to: 'pokemon#index'
-  root 'game#index'
+  root 'trainers#sign_in'
 
   get 'brewery/index'
 
