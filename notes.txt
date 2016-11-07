@@ -22,3 +22,4 @@ http://stackoverflow.com/questions/16835963/sidekiq-not-processing-queue
 
 
 make sure production developement and test environments all have the same config.mailer line
+worker: bundle exec sidekiq -c 5 -v
