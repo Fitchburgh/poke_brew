@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     $pkmnSearchBtn.attr('disabled', true);
     $.ajax({
-      'url': '/pokemon/get?pokemon=' + encodeURIComponent(pokemon), //'/brewery/index',
+      'url': '/pokemon/get?pokemon=' + encodeURIComponent(pokemon),
       'method': 'GET',
       "data": {},
       'dataType': 'json',
@@ -65,6 +65,7 @@ $(document).ready(function () {
         }
       },
       'error': function(error) {
+        console.log(pokemon);
         console.log('help me computer');
       }
     });
@@ -74,7 +75,7 @@ $(document).ready(function () {
   function PokemonDetails(pokeSelect) {
     this.info = {
         pokemonName: pokeSelect.name,
-        pokemonTP: pokeSelect.weight, // TP is tolerance points
+        pokemonTP: pokeSelect.weight,
         pokemonType: pokeSelect.type.type.name,
         pokemonAttacks: pokeSelect.attacks,
     };
@@ -92,7 +93,7 @@ $(document).ready(function () {
   function getBeerAttacks(brewery) {
     $brewerySearchBtn.attr('disabled', true);
     $.ajax({
-      'url': '/brewery/get?brewery=' + encodeURIComponent(brewery),//'/brewery/get?utf8=%E2%9C%93&brewery=' + encodeURIComponent(brewery) + '&commit=Submit',
+      'url': '/brewery/get?brewery=' + encodeURIComponent(brewery),
       'method': 'GET',
       'data': {},
       'dataType': 'json',
@@ -106,7 +107,6 @@ $(document).ready(function () {
           brewery = JSON.parse(breweryResult);
           BeerDetails(brewery);
           $brewerySearchBtn.attr('disabled', false);
-          // window.location.href = '/game/loadout';
         }
       },
       'error': function(error) {
@@ -174,7 +174,7 @@ $(document).ready(function () {
       }
 
       //dodge
-      // idea here is that usercandodgeup is false until they hit down, left if right, etc.
+      //dodge makes computer damage 0 for x seconds.
       //38 is up arrow
       if (key === 38 && userCanDodgeUp) {
         compDamage = 0;
