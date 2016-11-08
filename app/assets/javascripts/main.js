@@ -1,3 +1,5 @@
+//NOTE want to add pokeball rolling off the screen when button clicked.
+
 $(document).ready(function () {
   // beer loading whenever ajax calls are started
   $body = $("body");
