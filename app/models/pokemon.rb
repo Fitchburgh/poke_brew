@@ -1,7 +1,7 @@
 require 'json'
 require 'httparty'
 require 'redis'
-require_relative '../workers/poke_get_worker.rb'
+require_relative 'workers/poke_get_worker.rb'
 
 class Pokemon
   attr_reader :pkmn_name, :pkmn_id, :pkmn_readout

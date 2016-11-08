@@ -3,7 +3,7 @@ require 'httparty'
 require 'redis'
 # optional
 require 'pry'
-require_relative '../workers/beer_get_worker.rb'
+require_relative 'workers/beer_get_worker.rb'
 #
 
 
