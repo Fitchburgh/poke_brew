@@ -50,6 +50,6 @@ class Brewery # < ApplicationRecord
     end
 
     @brewery_readout = Redis.current.get(@name)
-    @brewery_readout = File.read("cache/brewery/#{name}.json") if @brewery_readout == {}
+    # @brewery_readout = File.read("cache/brewery/#{name}.json") if @brewery_readout == {}
   end
 end

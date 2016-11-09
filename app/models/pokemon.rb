@@ -26,8 +26,8 @@ class Pokemon
     end
 
     @pkmn_readout = Redis.current.get(@pkmn_name)
-    @pkmn_readout =
-      File.read("cache/pokemon/#{@pkmn_name}.json") if @pkmn_readout == {}
+    # @pkmn_readout =
+    #   File.read("cache/pokemon/#{@pkmn_name}.json") if @pkmn_readout == {}
   end
 end
 
