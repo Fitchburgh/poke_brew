@@ -44,8 +44,11 @@ class Brewery # < ApplicationRecord
   def write_to(object)
     if Redis.current.get(@name) != nil || object.name_check == true
     else
+      p "before worker"
       BeerGetWorker.perform_async(@brewery_id)
+      p "end job"
     end
+
     @brewery_readout = Redis.current.get(@name)
     @brewery_readout = File.read("cache/brewery/#{name}.json") if @brewery_readout == {}
   end
