@@ -9,6 +9,6 @@ end
 Sidekiq.configure_client do |config|
   config.redis = {
     url: redis_url,
-    size: 50
+    size: 1
   }
 end
