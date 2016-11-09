@@ -1,7 +1,16 @@
-Sidekiq.configure_server do |config|
-  database_url = ENV['DATABASE_URL']
-  if database_url
-    ENV['DATABASE_URL'] = "#{database_url}?pool=25"
-    ActiveRecord::Base.establish_connection
+redis_url = ENV['REDIS_URL']
+
+  Sidekiq.configure_server do |config|
+    config.redis = {
+      url: redis_url,
+      namespace: 'workers',
+      size: 2
+    }
   end
-end
+  Sidekiq.configure_client do |config|
+    config.redis = {
+      url: redis_url,
+      namespace: 'workers',
+      size: 1
+    }
+  end
